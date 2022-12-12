@@ -36,7 +36,7 @@ public class Parser {
 
         Operation operation = null;
 
-        if (Program.supportedOperations.length != 4) {
+        if (Program.supportedOperations.length != 7) {
             System.err.println("At least one operation is not implemented");
             System.exit(1);
             return;
@@ -45,6 +45,9 @@ public class Parser {
         switch (currentWord.toLowerCase()){
             case "+" -> operation = new AddOperation(program);
             case "-" -> operation = new SubtractOperation(program);
+            case "*" -> operation = new MultiplyOperation(program);
+            case "/" -> operation = new DivideOperation(program);
+            case "%" -> operation = new ModuloOperation(program);
             case "." -> operation = new PopPrintOperation(program);
             case "," -> operation = new PrintOperation(program);
             default -> operation = new PushOperation(program, Integer.parseInt(currentWord));

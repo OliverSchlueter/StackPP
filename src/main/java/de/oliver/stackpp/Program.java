@@ -13,6 +13,9 @@ public class Program {
             PushOperation.class,
             AddOperation.class,
             SubtractOperation.class,
+            MultiplyOperation.class,
+            DivideOperation.class,
+            ModuloOperation.class,
             PopPrintOperation.class,
     };
 

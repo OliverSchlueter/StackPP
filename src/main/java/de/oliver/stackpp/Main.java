@@ -12,7 +12,7 @@ public class Main {
         if(args.length == 1){
             content = Files.readString(Path.of(args[0]));
         } else {
-            content = "2 , ,";
+            content = "12 5 % ,";
         }
 
         Parser parser = new Parser(content);
