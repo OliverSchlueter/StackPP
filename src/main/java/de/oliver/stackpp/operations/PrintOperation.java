@@ -10,7 +10,7 @@ public class PrintOperation extends Operation{
 
     @Override
     public void execute() {
-        int a = program.getStack().firstElement();
+        int a = program.getStack().lastElement();
 
         System.out.println(a);
     }

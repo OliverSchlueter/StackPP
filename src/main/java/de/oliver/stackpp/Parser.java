@@ -11,7 +11,7 @@ public class Parser {
     private Program program;
 
     public Parser(String content) {
-        this.content = content;
+        this.content = content.replace("\n", " ");
         this.words = this.content.split(" ");
         this.currentWordIndex = 0;
     }
