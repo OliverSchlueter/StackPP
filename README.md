@@ -2,13 +2,17 @@
 
 It's a smart stack.
 
-This is a stack-based programming language
+This is a stack-based programming language.
+
+_Still in active development!_
 
 ## Build and run
 
 ### Build jar from source
 
 ````console
+$ git clone https://github.com/OliverSchlueter/StackPP.git
+$ cd StackPP/
 $ gradlew jar
 ````
 
