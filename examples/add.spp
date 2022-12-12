@@ -1,0 +1,5 @@
+// to add two numbers, you first need to push two numbers onto the stack
+// then write a plus ('+') to add them
+
+5 3 +
+,
