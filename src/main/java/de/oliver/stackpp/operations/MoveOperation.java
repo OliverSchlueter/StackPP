@@ -3,12 +3,14 @@ package de.oliver.stackpp.operations;
 import de.oliver.stackpp.virtualMachine.Program;
 import de.oliver.stackpp.virtualMachine.Register;
 
-public class PrintOperation extends Operation{
+public class MoveOperation extends Operation{
 
+    private final int value;
     private final String registerName;
 
-    public PrintOperation(Program program, String registerName) {
+    public MoveOperation(Program program, int value, String registerName) {
         super(program);
+        this.value = value;
         this.registerName = registerName;
     }
 
@@ -16,7 +18,11 @@ public class PrintOperation extends Operation{
     public void execute() {
         Register<Integer> register = program.getRegisters().get(registerName);
 
-        System.out.println(register.getValue());
+        register.setValue(value);
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public String getRegisterName() {

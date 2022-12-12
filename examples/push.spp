@@ -1,5 +1,0 @@
-// to push a value onto the stack, simply write the value
-// you can view the value of top element of the stack with a comma (',')
-
-123
-,

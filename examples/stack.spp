@@ -1,0 +1,16 @@
+push    3       ; push '3' onto the stack
+push    6       ; push '6' onto the stack
+push    2       ; push '2' onto the stack
+
+pop     a       ; puts the top element of the stack into the 'a' register
+pop     b       ; puts the top element of the stack into the 'b' register
+
+add     a b     ; adds the values in the 'a' and 'b' registers
+
+pop     b       ; puts the top element of the stack into the 'b' register
+
+add     a b     ; adds the values in the 'a' and 'b' registers
+
+pushreg a       ; push the value of the 'a' register onto the stack
+
+prints          ; print all elements that are on the stack

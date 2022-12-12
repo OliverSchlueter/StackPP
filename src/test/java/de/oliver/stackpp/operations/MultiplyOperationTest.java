@@ -1,6 +1,6 @@
 package de.oliver.stackpp.operations;
 
-import de.oliver.stackpp.Program;
+import de.oliver.stackpp.virtualMachine.Program;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,15 +11,15 @@ class MultiplyOperationTest {
     @BeforeEach
     void setUp() {
         program = new Program();
-        program.getStack().push(5);
-        program.getStack().push(3);
+        program.getRegisters().get("a").setValue(5);
+        program.getRegisters().get("b").setValue(3);
     }
 
     @Test
     void execute() {
-        Operation operation = new MultiplyOperation(program);
+        Operation operation = new MultiplyOperation(program, "a", "b");
         operation.execute();
 
-        assert program.getStack().pop() == 15;
+        assert program.getRegisters().get("a").getValue() == 15;
     }
 }

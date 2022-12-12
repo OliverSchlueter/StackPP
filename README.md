@@ -1,8 +1,8 @@
 # Stack++
 
-It's a smart stack.
+Smart stack + some registers = Stack++.
 
-This is a stack-based programming language.
+Looks a bit like assembly but it is not!
 
 _Still in active development!_
 

@@ -1,6 +1,6 @@
 package de.oliver.stackpp.operations;
 
-import de.oliver.stackpp.Program;
+import de.oliver.stackpp.virtualMachine.Program;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,15 +11,15 @@ class DivideOperationTest {
     @BeforeEach
     void setUp() {
         program = new Program();
-        program.getStack().push(8);
-        program.getStack().push(4);
+        program.getRegisters().get("a").setValue(8);
+        program.getRegisters().get("b").setValue(4);
     }
 
     @Test
     void execute() {
-        Operation operation = new DivideOperation(program);
+        Operation operation = new DivideOperation(program, "a", "b");
         operation.execute();
 
-        assert program.getStack().pop() == 2;
+        assert program.getRegisters().get("a").getValue() == 2;
     }
 }

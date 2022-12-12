@@ -1,5 +1,6 @@
-// to add two numbers, you first need to push two numbers onto the stack
-// then write a plus ('+') to add them
+move    15 a    ; put '15' into the 'a' register
+move    4  b    ; put '4' into the 'b' register
 
-5 3 +
-,
+add     a  b    ; add the values of the two registers and put the sum back into the 'a' register
+
+print   a       ; print the value the 'a' registers holds

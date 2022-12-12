@@ -1,73 +1,54 @@
 package de.oliver.stackpp;
 
 import de.oliver.stackpp.operations.*;
+import de.oliver.stackpp.virtualMachine.Program;
+
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class Parser {
 
-    private final String content;
-    private final String[] words;
-
-    private int currentWordIndex;
+    private LinkedList<Instruction> instructions;
     private Program program;
 
-    public Parser(String content) {
-        this.content = content.replace("\r\n", " ");
-        this.words = this.content.split(" ");
-        this.currentWordIndex = 0;
+    public Parser(LinkedList<Instruction> instructions) {
+        this.instructions = instructions;
     }
 
     public Program parse(){
         program = new Program();
 
-        for (int i = 0; i < words.length; i++) {
-            parseNextWord();
+        for (Instruction instruction : instructions) {
+            parseInstruction(instruction);
         }
 
         return program;
     }
 
-    private void parseNextWord(){
-        String currentWord = words[currentWordIndex];
-
-        if(currentWord.length() == 0 || currentWord.equals(" ")){
-            currentWordIndex++;
-            return;
-        }
-
+    private void parseInstruction(Instruction instruction){
         Operation operation = null;
 
-        if (Program.supportedOperations.length != 7) {
-            System.err.println("At least one operation is not implemented");
-            System.exit(1);
-            return;
-        }
+        switch (instruction.token()){
+            case PUSH_LITERAL -> operation = new PushOperation(program, Integer.parseInt(instruction.args()[0]));
+            case PUSH_REGISTER -> operation = new PushOperation(program, instruction.args()[0]);
+            case POP -> operation = new PopOperation(program, instruction.args()[0]);
+            case MOVE -> operation = new MoveOperation(program, Integer.parseInt(instruction.args()[0]), instruction.args()[1]);
+            case ADD -> operation = new AddOperation(program, instruction.args()[0], instruction.args()[1]);
+            case SUBTRACT -> operation = new SubtractOperation(program, instruction.args()[0], instruction.args()[1]);
+            case MULTIPLY -> operation = new MultiplyOperation(program, instruction.args()[0], instruction.args()[1]);
+            case DIVIDE -> operation = new DivideOperation(program, instruction.args()[0], instruction.args()[1]);
+            case MODULO -> operation = new ModuloOperation(program, instruction.args()[0], instruction.args()[1]);
+            case PRINT -> operation = new PrintOperation(program, instruction.args()[0]);
+            case PRINT_STACK -> operation = new PrintStackOperation(program);
 
-        switch (currentWord.toLowerCase()){
-            case "+" -> operation = new AddOperation(program);
-            case "-" -> operation = new SubtractOperation(program);
-            case "*" -> operation = new MultiplyOperation(program);
-            case "/" -> operation = new DivideOperation(program);
-            case "%" -> operation = new ModuloOperation(program);
-            case "." -> operation = new PopPrintOperation(program);
-            case "," -> operation = new PrintOperation(program);
-            default -> operation = new PushOperation(program, Integer.parseInt(currentWord));
+            default -> throw new NoSuchElementException("Could not find operation token");
         }
 
         program.getInstructions().offer(operation);
-
-        currentWordIndex++;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public String[] getWords() {
-        return words;
-    }
-
-    public int getCurrentWordIndex() {
-        return currentWordIndex;
+    public LinkedList<Instruction> getInstructions() {
+        return instructions;
     }
 
     public Program getProgram() {
