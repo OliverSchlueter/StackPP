@@ -15,7 +15,6 @@ public class Program {
         this.stack = new Stack<>();
         this.registers = new HashMap<>();
         this.instructions = new LinkedList<>();
-
         clearData();
     }
 

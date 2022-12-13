@@ -17,7 +17,7 @@ class DivideOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new DivideOperation(program, "a", "b");
+        Operation operation = new DivideOperation(program, p -> p.getRegisters().get("a"), p -> p.getRegisters().get("b").getValue());
         operation.execute();
 
         assert program.getRegisters().get("a").getValue() == 2;

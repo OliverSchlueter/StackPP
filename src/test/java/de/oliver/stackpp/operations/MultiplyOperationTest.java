@@ -17,7 +17,7 @@ class MultiplyOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new MultiplyOperation(program, "a", "b");
+        Operation operation = new MultiplyOperation(program, p -> p.getRegisters().get("a"), p -> p.getRegisters().get("b").getValue());
         operation.execute();
 
         assert program.getRegisters().get("a").getValue() == 15;

@@ -17,7 +17,7 @@ class AddOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new AddOperation(program, "a", "b");
+        Operation operation = new AddOperation(program, p -> p.getRegisters().get("a"), p -> p.getRegisters().get("b").getValue());
         operation.execute();
 
         assert program.getRegisters().get("a").getValue() == 10;

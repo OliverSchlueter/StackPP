@@ -3,24 +3,26 @@ package de.oliver.stackpp.operations;
 import de.oliver.stackpp.virtualMachine.Program;
 import de.oliver.stackpp.virtualMachine.Register;
 
+import java.util.function.Function;
+
 public class DivideOperation extends Operation{
 
-    private final String registerNameA;
-    private final String registerNameB;
+    private final Function<Program, Register<Integer>> a;
+    private final Function<Program, Integer> b;
 
-    public DivideOperation(Program program, String registerNameA, String registerNameB) {
+    public DivideOperation(Program program, Function<Program, Register<Integer>> a, Function<Program, Integer> b) {
         super(program);
-        this.registerNameA = registerNameA;
-        this.registerNameB = registerNameB;
+        this.a = a;
+        this.b = b;
     }
 
     @Override
     public void execute() {
-        Register<Integer> registerA = program.getRegisters().get(registerNameA);
-        Register<Integer> registerB = program.getRegisters().get(registerNameB);
+        Register<Integer> aReg = a.apply(program);
+        int bVal = b.apply(program);
 
-        int result = registerA.getValue() / registerB.getValue();
+        int result = aReg.getValue() / bVal;
 
-        registerA.setValue(result);
+        aReg.setValue(result);
     }
 }

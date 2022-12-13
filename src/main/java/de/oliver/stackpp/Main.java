@@ -16,22 +16,12 @@ public class Main {
             content = Files.readString(Path.of(args[0]));
         } else {
             content = """
-                    push    3       ; push '3' onto the stack\r
-                    push    6       ; push '6' onto the stack\r
-                    push    2       ; push '2' onto the stack\r
-                                        
-                    pop     a       ; puts the top element of the stack into the 'a' register\r
-                    pop     b       ; puts the top element of the stack into the 'b' register\r
-                                        
-                    add     a b     ; adds the values in the 'a' and 'b' registers\r
-                                        
-                    pop     b       ; puts the top element of the stack into the 'b' register\r
-                                        
-                    add     a b     ; adds the values in the 'a' and 'b' registers\r
-                                        
-                    pushreg a       ; push the value of the 'a' register onto the stack\r
-                                        
-                    prints
+                    move 5 a\r
+                    move 5 b\r
+                    add a 5\r
+                    move 2 b\r
+                    subtract a b\r
+                    print a
                     """;
         }
 
