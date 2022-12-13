@@ -12,6 +12,9 @@ public enum Token {
     MODULO("modulo"),
     PRINT("print"),
     PRINT_STACK("prints"),
+    IF("if"),
+    ELSE("else"),
+    END("end"),
     ;
 
     private final String identifier;

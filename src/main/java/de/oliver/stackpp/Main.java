@@ -18,10 +18,12 @@ public class Main {
             content = """
                     move 5 a\r
                     move 5 b\r
-                    add a 5\r
-                    move 2 b\r
-                    subtract a b\r
-                    print a
+                    if a b\r
+                    move 1 c\r
+                    else\r
+                    move 0 c\r
+                    end\r
+                    print c\r
                     """;
         }
 

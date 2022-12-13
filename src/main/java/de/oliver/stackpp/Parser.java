@@ -6,28 +6,50 @@ import de.oliver.stackpp.virtualMachine.Register;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
+import java.util.Stack;
 import java.util.function.Function;
 
 public class Parser {
 
-    private LinkedList<Instruction> instructions;
+    private final LinkedList<Instruction> instructions;
     private Program program;
+    private final Stack<IfOperation> waitForEnd;
 
     public Parser(LinkedList<Instruction> instructions) {
         this.instructions = instructions;
+        this.waitForEnd = new Stack<>();
     }
 
     public Program parse(){
         program = new Program();
 
         for (Instruction instruction : instructions) {
-            parseInstruction(instruction);
+            Operation operation = parseInstruction(instruction);
+
+            if(operation instanceof IfOperation){
+                waitForEnd.push((IfOperation) operation);
+            }else if(operation instanceof ElseOperation){
+                waitForEnd.lastElement().setInElse(true);
+                continue;
+            } else if(operation instanceof EndOperation){
+                waitForEnd.pop();
+                continue;
+            }
+
+
+            if(waitForEnd.size() > 0 && !(operation instanceof IfOperation)){
+                // put operation into the if-block
+                waitForEnd.lastElement().addOperation(operation);
+            } else {
+                // put operation into program-block
+                program.getInstructions().offer(operation);
+            }
         }
 
         return program;
     }
 
-    private void parseInstruction(Instruction instruction){
+    private Operation parseInstruction(Instruction instruction){
         Operation operation = null;
 
         switch (instruction.token()){
@@ -71,10 +93,22 @@ public class Parser {
 
             case PRINT_STACK -> operation = new PrintStackOperation(program);
 
+            case IF -> {
+                Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
+                Function<Program, Integer> b = getValueFromString(instruction.args()[1]);
+
+                operation = new IfOperation(program, a, b);
+            }
+
+            case ELSE -> operation = new ElseOperation(program);
+
+            case END -> operation = new EndOperation(program);
+
+
             default -> throw new NoSuchElementException("Could not find operation token");
         }
 
-        program.getInstructions().offer(operation);
+        return operation;
     }
 
     private Function<Program, Integer> getIntegerFromString(String s){

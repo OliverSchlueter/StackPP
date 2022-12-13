@@ -1,0 +1,14 @@
+move    5 a
+move    5 b
+
+if      a b     ; compare the values in 'a' and 'b'
+                ; <- here begins the 'true' block
+move    1 c
+                ; <- here ends the 'true block'
+else
+                ; <- here begins the 'false' block
+move    0 c
+                ; <- here ends the 'false' block
+end             ; here ends the whole if-else
+
+print c
