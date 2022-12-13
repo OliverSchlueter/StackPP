@@ -15,7 +15,7 @@ class PushOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new PushOperation(program, 5);
+        Operation operation = new PushOperation(program, p -> 5);
         operation.execute();
 
         assert program.getStack().size() > 0 && program.getStack().pop() == 5;

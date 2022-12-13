@@ -31,10 +31,23 @@ public class Parser {
         Operation operation = null;
 
         switch (instruction.token()){
-            case PUSH_LITERAL -> operation = new PushOperation(program, Integer.parseInt(instruction.args()[0]));
-            case PUSH_REGISTER -> operation = new PushOperation(program, instruction.args()[0]);
-            case POP -> operation = new PopOperation(program, instruction.args()[0]);
-            case MOVE -> operation = new MoveOperation(program, Integer.parseInt(instruction.args()[0]), instruction.args()[1]);
+            case PUSH -> {
+                Function<Program, Integer> value = getValueFromString(instruction.args()[0]);
+                operation = new PushOperation(program, value);
+            }
+
+            case POP -> {
+                Function<Program, Register<Integer>> register = getRegisterFromString(instruction.args()[0]);
+                operation = new PopOperation(program, register);
+            }
+
+            case MOVE -> {
+                Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
+                Function<Program, Register<Integer>> b = getRegisterFromString(instruction.args()[1]);
+
+                operation = new MoveOperation(program, a, b);
+            }
+
             case ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO -> {
                 String aStr = instruction.args()[0];
                 String bStr = instruction.args()[1];
@@ -49,9 +62,13 @@ public class Parser {
                     case DIVIDE -> operation = new DivideOperation(program, a, b);
                     case MODULO -> operation = new ModuloOperation(program, a, b);
                 }
-
             }
-            case PRINT -> operation = new PrintOperation(program, instruction.args()[0]);
+
+            case PRINT -> {
+                Function<Program, Register<Integer>> register = getRegisterFromString(instruction.args()[0]);
+                operation = new PrintOperation(program, register);
+            }
+
             case PRINT_STACK -> operation = new PrintStackOperation(program);
 
             default -> throw new NoSuchElementException("Could not find operation token");
@@ -60,7 +77,11 @@ public class Parser {
         program.getInstructions().offer(operation);
     }
 
-    private Function<Program, Register<Integer>>getRegisterFromString(String s){
+    private Function<Program, Integer> getIntegerFromString(String s){
+        return p -> Integer.parseInt(s);
+    }
+
+    private Function<Program, Register<Integer>> getRegisterFromString(String s){
         if(!program.getRegisters().containsKey(s)){
             throw new NullPointerException("Could not find a register with the name '" + s + "'");
         }
@@ -76,7 +97,7 @@ public class Parser {
             func = p -> p.getRegisters().get(s).getValue();
         } else {
             // try parse to literal
-            func = p -> Integer.parseInt(s);
+            func = getIntegerFromString(s);
         }
 
         return func;

@@ -3,8 +3,7 @@ package de.oliver.stackpp;
 public enum Token {
 
     MOVE("move"),
-    PUSH_LITERAL("push"),
-    PUSH_REGISTER("pushreg"),
+    PUSH("push"),
     POP("pop"),
     ADD("add"),
     SUBTRACT("subtract"),

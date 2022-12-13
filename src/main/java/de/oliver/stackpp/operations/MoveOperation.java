@@ -3,29 +3,32 @@ package de.oliver.stackpp.operations;
 import de.oliver.stackpp.virtualMachine.Program;
 import de.oliver.stackpp.virtualMachine.Register;
 
+import java.util.function.Function;
+
 public class MoveOperation extends Operation{
 
-    private final int value;
-    private final String registerName;
+    private final Function<Program, Integer> value;
+    private final Function<Program, Register<Integer>> register;
 
-    public MoveOperation(Program program, int value, String registerName) {
+    public MoveOperation(Program program, Function<Program, Integer> value, Function<Program, Register<Integer>> register) {
         super(program);
         this.value = value;
-        this.registerName = registerName;
+        this.register = register;
     }
 
     @Override
     public void execute() {
-        Register<Integer> register = program.getRegisters().get(registerName);
+        Register<Integer> reg = register.apply(program);
+        int val = value.apply(program);
 
-        register.setValue(value);
+        reg.setValue(val);
     }
 
     public int getValue() {
-        return value;
+        return value.apply(program);
     }
 
-    public String getRegisterName() {
-        return registerName;
+    public Register<Integer> getRegister(){
+        return register.apply(program);
     }
 }

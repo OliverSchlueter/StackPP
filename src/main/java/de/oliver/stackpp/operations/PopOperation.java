@@ -3,23 +3,23 @@ package de.oliver.stackpp.operations;
 import de.oliver.stackpp.virtualMachine.Program;
 import de.oliver.stackpp.virtualMachine.Register;
 
+import java.util.function.Function;
+
 public class PopOperation extends Operation{
 
-    private final String registerName;
+    private final Function<Program, Register<Integer>> register;
 
-    public PopOperation(Program program, String registerName) {
+    public PopOperation(Program program, Function<Program, Register<Integer>> register) {
         super(program);
-        this.registerName = registerName;
+        this.register = register;
     }
 
     @Override
     public void execute() {
-        Register<Integer> register = program.getRegisters().get(registerName);
-
-        register.setValue(program.getStack().pop());
+        register.apply(program).setValue(program.getStack().pop());
     }
 
-    public String getRegisterName() {
-        return registerName;
+    public Register<Integer> getRegister(){
+        return register.apply(program);
     }
 }
