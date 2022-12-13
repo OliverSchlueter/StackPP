@@ -14,7 +14,12 @@ public enum Token {
     PRINT_STACK("prints"),
     IF("if"),
     ELSE("else"),
+    WHILE("while"),
     END("end"),
+
+    EQUAL_SIGN("="),
+    GREATER_SIGN(">"),
+    LOWER_SIGN("<"),
     ;
 
     private final String identifier;
@@ -25,5 +30,15 @@ public enum Token {
 
     public String getIdentifier() {
         return identifier;
+    }
+
+    public static Token getTokenByIdentifier(String i){
+        for (Token token : values()) {
+            if(token.getIdentifier().equalsIgnoreCase(i)){
+                return token;
+            }
+        }
+
+        return null;
     }
 }

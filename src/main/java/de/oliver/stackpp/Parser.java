@@ -13,7 +13,7 @@ public class Parser {
 
     private final LinkedList<Instruction> instructions;
     private Program program;
-    private final Stack<IfOperation> waitForEnd;
+    private final Stack<BlockOperation> waitForEnd;
 
     public Parser(LinkedList<Instruction> instructions) {
         this.instructions = instructions;
@@ -26,18 +26,23 @@ public class Parser {
         for (Instruction instruction : instructions) {
             Operation operation = parseInstruction(instruction);
 
-            if(operation instanceof IfOperation){
-                waitForEnd.push((IfOperation) operation);
+            if(operation instanceof BlockOperation blockOperation){
+                // open new block
+                waitForEnd.push(blockOperation);
+
             }else if(operation instanceof ElseOperation){
-                waitForEnd.lastElement().setInElse(true);
+                // switch into the else-block
+                ((IfOperation) waitForEnd.lastElement()).setInElse(true);
                 continue;
+
             } else if(operation instanceof EndOperation){
+                // close most recent block
                 waitForEnd.pop();
                 continue;
             }
 
 
-            if(waitForEnd.size() > 0 && !(operation instanceof IfOperation)){
+            if(waitForEnd.size() > 0 && !(operation instanceof BlockOperation)){
                 // put operation into the if-block
                 waitForEnd.lastElement().addOperation(operation);
             } else {
@@ -95,12 +100,21 @@ public class Parser {
 
             case IF -> {
                 Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
-                Function<Program, Integer> b = getValueFromString(instruction.args()[1]);
+                Token compareOperation = Token.getTokenByIdentifier(instruction.args()[1]);
+                Function<Program, Integer> b = getValueFromString(instruction.args()[2]);
 
-                operation = new IfOperation(program, a, b);
+                operation = new IfOperation(program, a, b, compareOperation);
             }
 
             case ELSE -> operation = new ElseOperation(program);
+
+            case WHILE -> {
+                Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
+                Token compareOperation = Token.getTokenByIdentifier(instruction.args()[1]);
+                Function<Program, Integer> b = getValueFromString(instruction.args()[2]);
+
+                operation = new WhileOperation(program, a, b, compareOperation);
+            }
 
             case END -> operation = new EndOperation(program);
 

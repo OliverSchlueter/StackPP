@@ -1,35 +1,34 @@
 package de.oliver.stackpp.operations;
 
+import de.oliver.stackpp.Token;
 import de.oliver.stackpp.virtualMachine.Program;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Function;
 
-public class IfOperation extends Operation{
+public class IfOperation extends BlockOperation{
 
     private final Function<Program, Integer> a;
     private final Function<Program, Integer> b;
-    private final Queue<Operation> operations;
+    private final Token compareOperation;
     private final Queue<Operation> elseOperations;
     private boolean isInElse;
 
-    public IfOperation(Program program, Function<Program, Integer> a, Function<Program, Integer> b) {
-        super(program);
+    public IfOperation(Program program, Function<Program, Integer> a, Function<Program, Integer> b, Token compareOperation) {
+        super(program, new LinkedList<>());
         this.a = a;
         this.b = b;
-        this.operations = new LinkedList<>();
+        this.compareOperation = compareOperation;
         this.elseOperations = new LinkedList<>();
         this.isInElse = false;
     }
 
     @Override
     public void execute() {
-        int aVal = a.apply(program);
-        int bVal = b.apply(program);
-
-        if(aVal == bVal){
+        if(compare(program, a, b, compareOperation)){
             for (Operation operation : operations) {
+                System.out.println("run if");
                 operation.execute();
             }
         } else {
@@ -39,14 +38,11 @@ public class IfOperation extends Operation{
         }
     }
 
-    public Queue<Operation> getOperations() {
-        return operations;
-    }
-
     public Queue<Operation> getElseOperations() {
         return elseOperations;
     }
 
+    @Override
     public void addOperation(Operation operation){
         if(isInElse) {
             elseOperations.offer(operation);
@@ -57,5 +53,27 @@ public class IfOperation extends Operation{
 
     public void setInElse(boolean inElse) {
         isInElse = inElse;
+    }
+
+    public static boolean compare(Program program, Function<Program, Integer> a, Function<Program, Integer> b, Token compareOperation){
+        int aVal = a.apply(program);
+        int bVal = b.apply(program);
+
+        boolean conditionTrue = false;
+
+        switch (compareOperation){
+            case EQUAL_SIGN -> {
+                if(aVal == bVal) conditionTrue = true;
+            }
+
+            case GREATER_SIGN -> {
+                if(aVal > bVal) conditionTrue = true;
+            }
+
+            case LOWER_SIGN -> {
+                if(aVal < bVal) conditionTrue = true;
+            }
+        }
+        return conditionTrue;
     }
 }

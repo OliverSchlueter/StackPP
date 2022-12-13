@@ -16,14 +16,11 @@ public class Main {
             content = Files.readString(Path.of(args[0]));
         } else {
             content = """
-                    move 5 a\r
-                    move 5 b\r
-                    if a b\r
-                    move 1 c\r
-                    else\r
-                    move 0 c\r
-                    end\r
-                    print c\r
+                    move 0 a\r
+                    while a < 10\r
+                    print a\r
+                    add a 1\r
+                    end
                     """;
         }
 

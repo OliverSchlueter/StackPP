@@ -1,7 +1,7 @@
 move    5 a
 move    5 b
 
-if      a b     ; compare the values in 'a' and 'b'
+if      a = b     ; compare the values in 'a' and 'b'
                 ; <- here begins the 'true' block
 move    1 c
                 ; <- here ends the 'true block'
