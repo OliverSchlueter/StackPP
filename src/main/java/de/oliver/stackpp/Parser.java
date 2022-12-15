@@ -8,6 +8,7 @@ import de.oliver.stackpp.operations.impl.arithmetic.*;
 import de.oliver.stackpp.operations.impl.block.*;
 import de.oliver.stackpp.operations.impl.memory.MemoryGetOperation;
 import de.oliver.stackpp.operations.impl.memory.MemorySetOperation;
+import de.oliver.stackpp.operations.impl.register.AsciiPrintOperation;
 import de.oliver.stackpp.operations.impl.register.MoveOperation;
 import de.oliver.stackpp.operations.impl.register.PrintOperation;
 import de.oliver.stackpp.operations.impl.stack.PopOperation;
@@ -111,6 +112,11 @@ public class Parser {
             case PRINT -> {
                 Function<Program, Register<Integer>> register = getRegisterFromString(instruction.args()[0]);
                 operation = new PrintOperation(program, register);
+            }
+
+            case ASCII_PRINT -> {
+                Function<Program, Integer> charr = getValueFromString(instruction.args()[0]);
+                operation = new AsciiPrintOperation(program, charr);
             }
 
             case PRINT_STACK -> operation = new PrintStackOperation(program);

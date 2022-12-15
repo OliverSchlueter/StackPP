@@ -11,6 +11,7 @@ public enum Token {
     DIVIDE("divide"),
     MODULO("modulo"),
     PRINT("print"),
+    ASCII_PRINT("aprint"),
     PRINT_STACK("prints"),
     IF("if"),
     ELSE("else"),

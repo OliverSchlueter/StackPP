@@ -28,6 +28,8 @@ public class Lexer {
                 continue;
             }
 
+            line = line.strip();
+
             // skip comment lines
             if(line.startsWith(";")){
                 continue;

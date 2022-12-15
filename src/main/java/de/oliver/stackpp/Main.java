@@ -18,11 +18,7 @@ public class Main {
         } else {
             content = String.join("\r\n",
                     "",
-                    "move 5 a",
-                    "print a",
-                    "print a",
-                    "exit a",
-                    "print a",
+                    "aprint 65",
                     ""
                     );
         }
