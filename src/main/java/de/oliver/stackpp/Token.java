@@ -20,6 +20,7 @@ public enum Token {
     END("end"),
     MEM_GET("memget"),
     MEM_SET("memset"),
+    EXIT("exit"),
 
     EQUAL_SIGN("="),
     GREATER_SIGN(">"),

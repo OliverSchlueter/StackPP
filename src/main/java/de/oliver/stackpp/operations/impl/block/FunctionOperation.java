@@ -28,6 +28,7 @@ public class FunctionOperation extends BlockOperation implements CompileOperatio
 
     public void run(){
         for (Operation operation : operations) {
+            if(program.isExit()) return;
             operation.execute();
         }
     }

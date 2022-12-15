@@ -3,6 +3,7 @@ package de.oliver.stackpp;
 import de.oliver.stackpp.operations.BlockOperation;
 import de.oliver.stackpp.operations.CompileOperation;
 import de.oliver.stackpp.operations.Operation;
+import de.oliver.stackpp.operations.impl.ExitOperation;
 import de.oliver.stackpp.operations.impl.arithmetic.*;
 import de.oliver.stackpp.operations.impl.block.*;
 import de.oliver.stackpp.operations.impl.memory.MemoryGetOperation;
@@ -157,6 +158,12 @@ public class Parser {
                 Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
 
                 operation = new MemoryGetOperation(program, index);
+            }
+
+            case EXIT -> {
+                Function<Program, Integer> exitCode = getValueFromString(instruction.args()[0]);
+
+                operation = new ExitOperation(program, exitCode);
             }
 
             default -> throw new NoSuchElementException("Could not find operation token");

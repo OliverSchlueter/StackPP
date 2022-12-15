@@ -18,11 +18,11 @@ public class Main {
         } else {
             content = String.join("\r\n",
                     "",
-                    "memset 5 1",
-                    "memget 5",
-                    "memset 5 2",
-                    "memget 5",
-                    "prints",
+                    "move 5 a",
+                    "print a",
+                    "print a",
+                    "exit a",
+                    "print a",
                     ""
                     );
         }
@@ -34,7 +34,6 @@ public class Main {
         Program program = parser.parse();
 
         Machine machine = new Machine();
-
-        program.run(machine);
+        machine.runProgram(program);
     }
 }

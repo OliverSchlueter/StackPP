@@ -26,6 +26,13 @@ public class Machine {
         registers.put("e", new Register<>("e", 0));
     }
 
+    public void runProgram(Program program){
+        int exitCode = program.run(this);
+        System.out.println();
+        System.out.println("Program finished with exit code " + exitCode);
+        System.out.println();
+    }
+
     public void resetStack(){
         stack.clear();
     }

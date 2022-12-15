@@ -30,6 +30,7 @@ public class WhileOperation extends BlockOperation {
     public void execute() {
         while (IfOperation.compare(program, a, b, compareOperation)) {
             for (Operation operation : operations) {
+                if(program.isExit()) return;
                 operation.execute();
             }
         }

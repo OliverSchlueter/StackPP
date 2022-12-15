@@ -30,10 +30,12 @@ public class IfOperation extends BlockOperation {
     public void execute() {
         if(compare(program, a, b, compareOperation)){
             for (Operation operation : operations) {
+                if(program.isExit()) return;
                 operation.execute();
             }
         } else {
             for (Operation operation : elseOperations) {
+                if(program.isExit()) return;
                 operation.execute();
             }
         }
