@@ -8,10 +8,12 @@ public class Machine {
 
     private final Stack<Integer> stack;
     private final Map<String, Register<Integer>> registers;
+    private final Memory memory;
 
     public Machine() {
         this.stack = new Stack<>();
         this.registers = new HashMap<>();
+        this.memory = new Memory(1024);
 
         init();
     }
@@ -46,5 +48,9 @@ public class Machine {
         }
 
         return null;
+    }
+
+    public Memory getMemory() {
+        return memory;
     }
 }

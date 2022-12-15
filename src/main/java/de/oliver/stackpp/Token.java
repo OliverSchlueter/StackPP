@@ -18,6 +18,8 @@ public enum Token {
     FUNCTION("function"),
     CALL("call"),
     END("end"),
+    MEM_GET("memget"),
+    MEM_SET("memset"),
 
     EQUAL_SIGN("="),
     GREATER_SIGN(">"),

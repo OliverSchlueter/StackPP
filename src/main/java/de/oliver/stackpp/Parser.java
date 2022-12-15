@@ -5,6 +5,8 @@ import de.oliver.stackpp.operations.CompileOperation;
 import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.operations.impl.arithmetic.*;
 import de.oliver.stackpp.operations.impl.block.*;
+import de.oliver.stackpp.operations.impl.memory.MemoryGetOperation;
+import de.oliver.stackpp.operations.impl.memory.MemorySetOperation;
 import de.oliver.stackpp.operations.impl.register.MoveOperation;
 import de.oliver.stackpp.operations.impl.register.PrintOperation;
 import de.oliver.stackpp.operations.impl.stack.PopOperation;
@@ -144,6 +146,18 @@ public class Parser {
 
             case END -> operation = new EndOperation(program);
 
+            case MEM_SET -> {
+                Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
+                Function<Program, Byte> value = getByteFromString(instruction.args()[1]);
+
+                operation = new MemorySetOperation(program, index, value);
+            }
+
+            case MEM_GET -> {
+                Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
+
+                operation = new MemoryGetOperation(program, index);
+            }
 
             default -> throw new NoSuchElementException("Could not find operation token");
         }
@@ -153,6 +167,10 @@ public class Parser {
 
     private Function<Program, Integer> getIntegerFromString(String s){
         return p -> Integer.parseInt(s);
+    }
+
+    private Function<Program, Byte> getByteFromString(String s){
+        return p -> Byte.parseByte(s);
     }
 
     private Function<Program, Register<Integer>> getRegisterFromString(String s){

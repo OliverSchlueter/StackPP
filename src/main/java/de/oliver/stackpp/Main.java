@@ -16,24 +16,15 @@ public class Main {
         if(args.length == 1){
             content = Files.readString(Path.of(args[0]));
         } else {
-            content = """
-                    function max\r
-                        if a > b\r
-                            push a\r
-                            print a\r
-                        else\r
-                            push b\r
-                            print b\r
-                        end\r
-                    end\r
-                                        
-                    move 21 a\r
-                    move 4 b\r
-                    call max\r
-                                        
-                    pop c\r
-                    print c\r
-                    """;
+            content = String.join("\r\n",
+                    "",
+                    "memset 5 1",
+                    "memget 5",
+                    "memset 5 2",
+                    "memget 5",
+                    "prints",
+                    ""
+                    );
         }
 
         Lexer lexer = new Lexer(content);

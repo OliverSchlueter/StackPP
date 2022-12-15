@@ -4,6 +4,8 @@ Smart stack + some registers = Stack++.
 
 Looks a bit like assembly but it is not!
 
+Edit: turns out I made a virtual machine and Stack++ is something like bytecode for it
+
 _Still in active development!_
 
 ## Build and run
