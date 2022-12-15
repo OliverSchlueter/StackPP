@@ -17,7 +17,7 @@ public class AddOperation extends Operation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
         Register<Integer> aReg = a.apply(program);
         int bVal = b.apply(program);
 

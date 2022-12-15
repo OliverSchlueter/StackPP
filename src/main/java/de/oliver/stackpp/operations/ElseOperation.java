@@ -10,7 +10,7 @@ public class ElseOperation extends Operation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
 
     }
 }

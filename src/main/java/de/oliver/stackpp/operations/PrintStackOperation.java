@@ -9,7 +9,7 @@ public class PrintStackOperation extends Operation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
         for (int i = program.getStack().size()-1; i >= 0; i--) {
             System.out.println(program.getStack().get(i));
         }

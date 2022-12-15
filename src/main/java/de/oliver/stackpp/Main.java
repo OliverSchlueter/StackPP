@@ -26,7 +26,7 @@ public class Main {
                         end\r
                     end\r
                                         
-                    move 2 a\r
+                    move 21 a\r
                     move 4 b\r
                     call max\r
                                         

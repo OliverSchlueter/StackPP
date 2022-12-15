@@ -25,10 +25,10 @@ public class WhileOperation extends BlockOperation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
         while (IfOperation.compare(program, a, b, compareOperation)) {
             for (Operation operation : operations) {
-                operation.execute(program);
+                operation.execute();
             }
         }
     }

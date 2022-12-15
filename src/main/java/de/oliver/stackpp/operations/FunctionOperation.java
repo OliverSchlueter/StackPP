@@ -19,13 +19,13 @@ public class FunctionOperation extends BlockOperation implements CompileOperatio
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
 
     }
 
-    public void run(Program program){
+    public void run(){
         for (Operation operation : operations) {
-            operation.execute(program);
+            operation.execute();
         }
     }
 

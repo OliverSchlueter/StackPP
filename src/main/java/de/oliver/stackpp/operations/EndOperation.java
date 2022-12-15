@@ -9,7 +9,7 @@ public class EndOperation extends Operation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
 
     }
 }

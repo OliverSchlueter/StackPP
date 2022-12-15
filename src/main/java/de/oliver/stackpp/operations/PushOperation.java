@@ -14,7 +14,7 @@ public class PushOperation extends Operation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
         program.getStack().push(value.apply(program));
     }
 

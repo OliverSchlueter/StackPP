@@ -23,7 +23,7 @@ public class Program {
     public void run(){
         while (!instructions.isEmpty()) {
             Operation operation = instructions.poll();
-            operation.execute(this);
+            operation.execute();
         }
 
         clearData();

@@ -12,9 +12,9 @@ public class CallOperation extends Operation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
         FunctionOperation function = program.getFunctions().get(functionName);
-        function.run(program);
+        function.run();
     }
 
     public String getFunctionName() {

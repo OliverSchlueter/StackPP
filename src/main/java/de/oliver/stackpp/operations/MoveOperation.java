@@ -17,7 +17,7 @@ public class MoveOperation extends Operation{
     }
 
     @Override
-    public void execute(Program program) {
+    public void execute() {
         Register<Integer> reg = register.apply(program);
         int val = value.apply(program);
 
