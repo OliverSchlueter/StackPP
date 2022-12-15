@@ -1,5 +1,9 @@
 package de.oliver.stackpp;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Lexer {
@@ -17,7 +21,7 @@ public class Lexer {
         this.instructions = new LinkedList<>();
     }
 
-    public LinkedList<Instruction> lex(){
+    public LinkedList<Instruction> lex() {
 
         instructions = new LinkedList<>();
 
@@ -66,6 +70,28 @@ public class Lexer {
                 replacement = replacement.substring(0, replacement.length()-1);
 
                 macros.put(words[1], replacement);
+                continue;
+            } else if(words[0].equalsIgnoreCase("#include")){
+                if(words.length < 2){
+                    continue;
+                }
+
+                String path = words[1];
+
+                File file = new File(path);
+                if(!file.exists()){
+                    continue;
+                }
+
+                try {
+                    String content = Files.readString(Path.of(path));
+                    Lexer lexer = new Lexer(content);
+                    instructions.addAll(lexer.lex());
+                    macros.putAll(lexer.getMacros());
+                } catch (IOException e) {
+                    continue;
+                }
+
                 continue;
             }
 
