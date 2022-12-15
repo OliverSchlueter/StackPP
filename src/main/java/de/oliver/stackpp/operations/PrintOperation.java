@@ -15,11 +15,7 @@ public class PrintOperation extends Operation{
     }
 
     @Override
-    public void execute() {
+    public void execute(Program program) {
         System.out.println(register.apply(program).getValue());
-    }
-
-    public Register<Integer> getRegister(){
-        return register.apply(program);
     }
 }

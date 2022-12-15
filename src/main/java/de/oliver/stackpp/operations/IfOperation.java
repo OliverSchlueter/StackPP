@@ -25,15 +25,14 @@ public class IfOperation extends BlockOperation{
     }
 
     @Override
-    public void execute() {
+    public void execute(Program program) {
         if(compare(program, a, b, compareOperation)){
             for (Operation operation : operations) {
-                System.out.println("run if");
-                operation.execute();
+                operation.execute(program);
             }
         } else {
             for (Operation operation : elseOperations) {
-                operation.execute();
+                operation.execute(program);
             }
         }
     }

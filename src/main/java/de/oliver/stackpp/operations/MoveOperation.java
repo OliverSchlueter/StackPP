@@ -17,18 +17,10 @@ public class MoveOperation extends Operation{
     }
 
     @Override
-    public void execute() {
+    public void execute(Program program) {
         Register<Integer> reg = register.apply(program);
         int val = value.apply(program);
 
         reg.setValue(val);
-    }
-
-    public int getValue() {
-        return value.apply(program);
-    }
-
-    public Register<Integer> getRegister(){
-        return register.apply(program);
     }
 }

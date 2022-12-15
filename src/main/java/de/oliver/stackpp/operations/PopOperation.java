@@ -15,11 +15,7 @@ public class PopOperation extends Operation{
     }
 
     @Override
-    public void execute() {
+    public void execute(Program program) {
         register.apply(program).setValue(program.getStack().pop());
-    }
-
-    public Register<Integer> getRegister(){
-        return register.apply(program);
     }
 }

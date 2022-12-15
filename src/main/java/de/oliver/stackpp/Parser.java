@@ -21,10 +21,22 @@ public class Parser {
     }
 
     public Program parse(){
-        program = new Program();
+        this.program = new Program();
 
         for (Instruction instruction : instructions) {
             Operation operation = parseInstruction(instruction);
+
+            if(operation instanceof CompileOperation compileOperation){
+                compileOperation.executeOnCompile(program);
+            }
+
+            if(waitForEnd.size() > 0){
+                // put operation into the block
+                waitForEnd.lastElement().addOperation(operation);
+            } else {
+                // put operation into program-block
+                this.program.getInstructions().offer(operation);
+            }
 
             if(operation instanceof BlockOperation blockOperation){
                 // open new block
@@ -41,17 +53,9 @@ public class Parser {
                 continue;
             }
 
-
-            if(waitForEnd.size() > 0 && !(operation instanceof BlockOperation)){
-                // put operation into the if-block
-                waitForEnd.lastElement().addOperation(operation);
-            } else {
-                // put operation into program-block
-                program.getInstructions().offer(operation);
-            }
         }
 
-        return program;
+        return this.program;
     }
 
     private Operation parseInstruction(Instruction instruction){
@@ -114,6 +118,18 @@ public class Parser {
                 Function<Program, Integer> b = getValueFromString(instruction.args()[2]);
 
                 operation = new WhileOperation(program, a, b, compareOperation);
+            }
+
+            case FUNCTION -> {
+                String name = instruction.args()[0];
+
+                operation = new FunctionOperation(program, name);
+            }
+
+            case CALL -> {
+                String name = instruction.args()[0];
+
+                operation = new CallOperation(program, name);
             }
 
             case END -> operation = new EndOperation(program);

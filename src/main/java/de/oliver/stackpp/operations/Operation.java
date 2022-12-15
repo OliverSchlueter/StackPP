@@ -5,12 +5,12 @@ import de.oliver.stackpp.virtualMachine.Program;
 
 public abstract class Operation {
 
-    protected final Program program;
+    protected final Program programm;
 
     public Operation(Program program) {
-        this.program = program;
+        this.programm = program;
     }
 
-    public abstract void execute();
+    public abstract void execute(Program program);
 
 }

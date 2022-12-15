@@ -18,7 +18,7 @@ public class SubtractOperation extends Operation{
     }
 
     @Override
-    public void execute() {
+    public void execute(Program program) {
         Register<Integer> aReg = a.apply(program);
         int bVal = b.apply(program);
 

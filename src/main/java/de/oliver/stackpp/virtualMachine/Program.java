@@ -9,22 +9,24 @@ public class Program {
 
     private Stack<Integer> stack;
     private Map<String, Register<Integer>> registers;
+    private Map<String, FunctionOperation> functions;
     private final Queue<Operation> instructions;
 
     public Program() {
         this.stack = new Stack<>();
         this.registers = new HashMap<>();
         this.instructions = new LinkedList<>();
+        this.functions = new HashMap<>();
         clearData();
     }
 
     public void run(){
-        clearData();
-
         while (!instructions.isEmpty()) {
             Operation operation = instructions.poll();
-            operation.execute();
+            operation.execute(this);
         }
+
+        clearData();
     }
 
     private void clearData(){
@@ -42,6 +44,13 @@ public class Program {
 
     public Map<String, Register<Integer>> getRegisters() {
         return registers;
+    }
+
+    public Map<String, FunctionOperation> getFunctions() {
+        return functions;
+    }
+    public void addFunction(FunctionOperation functionOperation){
+        functions.put(functionOperation.getName(), functionOperation);
     }
 
     public Queue<Operation> getInstructions() {

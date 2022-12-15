@@ -16,11 +16,22 @@ public class Main {
             content = Files.readString(Path.of(args[0]));
         } else {
             content = """
-                    move 0 a\r
-                    while a < 10\r
-                    print a\r
-                    add a 1\r
-                    end
+                    function max\r
+                        if a > b\r
+                            push a\r
+                            print a\r
+                        else\r
+                            push b\r
+                            print b\r
+                        end\r
+                    end\r
+                                        
+                    move 2 a\r
+                    move 4 b\r
+                    call max\r
+                                        
+                    pop c\r
+                    print c\r
                     """;
         }
 

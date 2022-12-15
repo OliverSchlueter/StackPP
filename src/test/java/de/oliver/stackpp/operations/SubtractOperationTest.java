@@ -18,7 +18,7 @@ class SubtractOperationTest {
     @Test
     void execute() {
         Operation operation = new SubtractOperation(program, p -> p.getRegisters().get("a"), p -> p.getRegisters().get("b").getValue());
-        operation.execute();
+        operation.execute(program);
 
         assert program.getRegisters().get("a").getValue() == 4;
     }

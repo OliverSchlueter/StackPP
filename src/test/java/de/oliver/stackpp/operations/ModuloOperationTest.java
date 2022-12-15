@@ -18,7 +18,7 @@ class ModuloOperationTest {
     @Test
     void execute() {
         Operation operation = new ModuloOperation(program, p -> p.getRegisters().get("a"), p -> p.getRegisters().get("b").getValue());
-        operation.execute();
+        operation.execute(program);
 
         assert program.getRegisters().get("a").getValue() == 1;
     }

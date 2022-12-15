@@ -15,6 +15,8 @@ public enum Token {
     IF("if"),
     ELSE("else"),
     WHILE("while"),
+    FUNCTION("function"),
+    CALL("call"),
     END("end"),
 
     EQUAL_SIGN("="),
