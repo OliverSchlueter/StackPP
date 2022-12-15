@@ -19,4 +19,7 @@ public class PushOperation extends Operation {
         program.getMachine().getStack().push(value.apply(program));
     }
 
+    public Function<Program, Integer> getValue() {
+        return value;
+    }
 }

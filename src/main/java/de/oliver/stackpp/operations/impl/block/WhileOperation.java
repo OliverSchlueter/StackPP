@@ -35,4 +35,16 @@ public class WhileOperation extends BlockOperation {
             }
         }
     }
+
+    public Function<Program, Integer> getA() {
+        return a;
+    }
+
+    public Function<Program, Integer> getB() {
+        return b;
+    }
+
+    public Token getCompareOperation() {
+        return compareOperation;
+    }
 }

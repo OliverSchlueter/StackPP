@@ -18,4 +18,8 @@ public class ExitOperation extends Operation {
     public void execute() {
         program.exit(exitCode.apply(program));
     }
+
+    public Function<Program, Integer> getExitCode() {
+        return exitCode;
+    }
 }

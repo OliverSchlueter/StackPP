@@ -19,4 +19,8 @@ public class PopOperation extends Operation {
     public void execute() {
         register.apply(program).setValue(program.getMachine().getStack().pop());
     }
+
+    public Function<Program, Register<Integer>> getRegister() {
+        return register;
+    }
 }

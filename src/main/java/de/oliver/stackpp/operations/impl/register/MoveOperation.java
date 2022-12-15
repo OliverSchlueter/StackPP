@@ -24,4 +24,12 @@ public class MoveOperation extends Operation {
 
         reg.setValue(val);
     }
+
+    public Function<Program, Integer> getValue() {
+        return value;
+    }
+
+    public Function<Program, Register<Integer>> getRegister() {
+        return register;
+    }
 }

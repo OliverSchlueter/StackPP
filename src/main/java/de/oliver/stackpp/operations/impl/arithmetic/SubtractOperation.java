@@ -27,4 +27,12 @@ public class SubtractOperation extends Operation {
 
         aReg.setValue(result);
     }
+
+    public Function<Program, Register<Integer>> getA() {
+        return a;
+    }
+
+    public Function<Program, Integer> getB() {
+        return b;
+    }
 }

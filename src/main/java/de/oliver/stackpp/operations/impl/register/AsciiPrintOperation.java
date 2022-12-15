@@ -18,4 +18,8 @@ public class AsciiPrintOperation extends Operation {
     public void execute() {
         System.out.print((char) charr.apply(program).intValue());
     }
+
+    public Function<Program, Integer> getCharr() {
+        return charr;
+    }
 }

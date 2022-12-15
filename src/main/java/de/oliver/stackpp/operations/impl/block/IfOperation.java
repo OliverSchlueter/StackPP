@@ -41,10 +41,6 @@ public class IfOperation extends BlockOperation {
         }
     }
 
-    public Queue<Operation> getElseOperations() {
-        return elseOperations;
-    }
-
     @Override
     public void addOperation(Operation operation){
         if(isInElse) {
@@ -52,6 +48,26 @@ public class IfOperation extends BlockOperation {
         } else {
             operations.offer(operation);
         }
+    }
+
+    public Function<Program, Integer> getA() {
+        return a;
+    }
+
+    public Function<Program, Integer> getB() {
+        return b;
+    }
+
+    public Token getCompareOperation() {
+        return compareOperation;
+    }
+
+    public Queue<Operation> getElseOperations() {
+        return elseOperations;
+    }
+
+    public boolean isInElse() {
+        return isInElse;
     }
 
     public void setInElse(boolean inElse) {
