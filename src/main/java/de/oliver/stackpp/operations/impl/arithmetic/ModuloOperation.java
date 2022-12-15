@@ -1,16 +1,17 @@
-package de.oliver.stackpp.operations;
+package de.oliver.stackpp.operations.impl.arithmetic;
 
+import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.virtualMachine.Program;
 import de.oliver.stackpp.virtualMachine.Register;
 
 import java.util.function.Function;
 
-public class AddOperation extends Operation{
+public class ModuloOperation extends Operation {
 
     private final Function<Program, Register<Integer>> a;
     private final Function<Program, Integer> b;
 
-    public AddOperation(Program program, Function<Program, Register<Integer>> a, Function<Program, Integer> b) {
+    public ModuloOperation(Program program, Function<Program, Register<Integer>> a, Function<Program, Integer> b) {
         super(program);
         this.a = a;
         this.b = b;
@@ -21,7 +22,7 @@ public class AddOperation extends Operation{
         Register<Integer> aReg = a.apply(program);
         int bVal = b.apply(program);
 
-        int result = aReg.getValue() + bVal;
+        int result = aReg.getValue() % bVal;
 
         aReg.setValue(result);
     }

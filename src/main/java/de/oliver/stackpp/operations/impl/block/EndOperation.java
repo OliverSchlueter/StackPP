@@ -1,8 +1,9 @@
-package de.oliver.stackpp.operations;
+package de.oliver.stackpp.operations.impl.block;
 
+import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.virtualMachine.Program;
 
-public class EndOperation extends Operation{
+public class EndOperation extends Operation {
 
     public EndOperation(Program program) {
         super(program);

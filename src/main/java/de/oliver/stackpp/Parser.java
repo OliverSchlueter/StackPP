@@ -1,8 +1,18 @@
 package de.oliver.stackpp;
 
-import de.oliver.stackpp.operations.*;
+import de.oliver.stackpp.operations.BlockOperation;
+import de.oliver.stackpp.operations.CompileOperation;
+import de.oliver.stackpp.operations.Operation;
+import de.oliver.stackpp.operations.impl.arithmetic.*;
+import de.oliver.stackpp.operations.impl.block.*;
+import de.oliver.stackpp.operations.impl.register.MoveOperation;
+import de.oliver.stackpp.operations.impl.register.PrintOperation;
+import de.oliver.stackpp.operations.impl.stack.PopOperation;
+import de.oliver.stackpp.operations.impl.stack.PrintStackOperation;
+import de.oliver.stackpp.operations.impl.stack.PushOperation;
 import de.oliver.stackpp.virtualMachine.Program;
 import de.oliver.stackpp.virtualMachine.Register;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -146,22 +156,17 @@ public class Parser {
     }
 
     private Function<Program, Register<Integer>> getRegisterFromString(String s){
-        if(!program.getRegisters().containsKey(s)){
-            throw new NullPointerException("Could not find a register with the name '" + s + "'");
-        }
-
-        return p -> p.getRegisters().get(s);
+        return p -> program.getMachine().getRegister(s);
     }
 
     private Function<Program, Integer> getValueFromString(String s){
         Function<Program, Integer> func = null;
 
         // check if it is a register
-        if(program.getRegisters().containsKey(s)){
-            func = p -> p.getRegisters().get(s).getValue();
-        } else {
-            // try parse to literal
+        if (NumberUtils.isNumber(s)) {
             func = getIntegerFromString(s);
+        } else {
+            func = p -> program.getMachine().getRegister(s).getValue();
         }
 
         return func;

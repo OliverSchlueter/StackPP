@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group 'de.oliver'
@@ -10,11 +11,13 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-jar {
+shadowJar {
     archiveFileName.set("${project.name}.jar")
 
     manifest {

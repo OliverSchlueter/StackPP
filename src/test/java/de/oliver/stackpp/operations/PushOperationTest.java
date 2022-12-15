@@ -1,5 +1,7 @@
 package de.oliver.stackpp.operations;
 
+import de.oliver.stackpp.operations.impl.stack.PushOperation;
+import de.oliver.stackpp.virtualMachine.Machine;
 import de.oliver.stackpp.virtualMachine.Program;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +12,7 @@ class PushOperationTest {
 
     @BeforeEach
     void setUp() {
-        program = new Program();
+        program = new Program(new Machine());
     }
 
     @Test
@@ -18,6 +20,6 @@ class PushOperationTest {
         Operation operation = new PushOperation(program, p -> 5);
         operation.execute();
 
-        assert program.getStack().size() > 0 && program.getStack().pop() == 5;
+        assert program.getMachine().getStack().size() > 0 && program.getMachine().getStack().pop() == 5;
     }
 }

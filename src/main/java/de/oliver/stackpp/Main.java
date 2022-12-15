@@ -1,5 +1,6 @@
 package de.oliver.stackpp;
 
+import de.oliver.stackpp.virtualMachine.Machine;
 import de.oliver.stackpp.virtualMachine.Program;
 
 import java.io.IOException;
@@ -41,6 +42,8 @@ public class Main {
         Parser parser = new Parser(instructions);
         Program program = parser.parse();
 
-        program.run();
+        Machine machine = new Machine();
+
+        program.run(machine);
     }
 }

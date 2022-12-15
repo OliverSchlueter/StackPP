@@ -1,8 +1,9 @@
-package de.oliver.stackpp.operations;
+package de.oliver.stackpp.operations.impl.block;
 
+import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.virtualMachine.Program;
 
-public class CallOperation extends Operation{
+public class CallOperation extends Operation {
 
     private final String functionName;
 

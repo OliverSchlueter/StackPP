@@ -1,10 +1,11 @@
-package de.oliver.stackpp.operations;
+package de.oliver.stackpp.operations.impl.stack;
 
+import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.virtualMachine.Program;
 
 import java.util.function.Function;
 
-public class PushOperation extends Operation{
+public class PushOperation extends Operation {
 
     private final Function<Program, Integer> value;
 
@@ -15,7 +16,7 @@ public class PushOperation extends Operation{
 
     @Override
     public void execute() {
-        program.getStack().push(value.apply(program));
+        program.getMachine().getStack().push(value.apply(program));
     }
 
 }
