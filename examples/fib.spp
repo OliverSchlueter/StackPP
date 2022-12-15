@@ -1,0 +1,21 @@
+#DEFINE FIB_ITERATIONS 10
+
+push 0
+push 1
+
+move 0 a
+print a
+
+while c < FIB_ITERATIONS
+    pop a
+    pop b
+
+    add b a
+
+    push a
+    push b
+
+    print a
+
+    add c 1
+end
