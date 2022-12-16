@@ -63,7 +63,29 @@
 #DEFINE ASCII_8 56
 #DEFINE ASCII_9 57
 
+#DEFINE ASCII_NULL 0
 #DEFINE ASCII_SPACE 32
 #DEFINE ASCII_TAB 9
 #DEFINE ASCII_CARRIAGE_RETURN 10
 #DEFINE ASCII_LINE_FEED 13
+
+function printlnStr
+    ; 'f1' - pointer to the start of the string
+    ; the string must be null-terminated
+
+    move 1 i
+
+    while i = 1
+        memget a    ; read char
+        pop b       ; put char in 'b'
+
+        if b = ASCII_NULL   ; check if char is NULL
+            move 0 i        ; exit loop
+        else
+            aprint b    ; print char
+            add a 1     ; go to next char
+        end
+    end
+
+    aprint ASCII_CARRIAGE_RETURN    ; print newline
+end

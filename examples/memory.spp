@@ -1,6 +1,6 @@
 #INCLUDE ../../examples/ascii.spp
 
-malloc 6    ; allocate 10 bytes
+malloc 7    ; allocate 7 bytes
 pop a       ; put the ptr into 'a'
 
 move a b    ; copy the ptr to 'b'
@@ -17,17 +17,10 @@ add b 1
 memset b ASCII_LOWERCASE_E
 add b 1
 memset b ASCII_LOWERCASE_R
+add b 1
+memset b 0  ; null-terminate the string
 
-
-move a b        ; set 'b' back to the start
-move 0 i
-while i < 6
-    memget b    ; read memory
-    pop c       ; pop char into 'c'
-    aprint c    ; print char
-    add b 1     ; increament ptr
-
-    add i 1
-end
+move a f1           ; pass the ptr to the function
+call printlnStr     ; call the print-string function
 
 free a
