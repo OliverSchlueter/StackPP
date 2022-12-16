@@ -19,7 +19,8 @@ public class Main {
         } else {
             content = String.join("\r\n",
                     "",
-                    "aprint 65",
+                    "#INCLUDE ascii.spp",
+                    "aprint ASCII_UPPERCASE_L",
                     ""
                     );
         }

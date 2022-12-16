@@ -1,4 +1,4 @@
-#INCLUDE ../../examples/ascii.spp
+#INCLUDE string.spp
 
 malloc 7    ; allocate 7 bytes
 pop a       ; put the ptr into 'a'
@@ -21,6 +21,6 @@ add b 1
 memset b 0  ; null-terminate the string
 
 move a f1           ; pass the ptr to the function
-call printlnStr     ; call the print-string function
+call println        ; call the print-string function
 
 free a

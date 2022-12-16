@@ -2,6 +2,7 @@ package de.oliver.stackpp;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -11,6 +12,7 @@ public class Lexer {
     private final String content;
     private final String[] lines;
     private final Map<String, String> macros;
+    private final List<String> includes;
 
     private LinkedList<Instruction> instructions;
 
@@ -18,6 +20,7 @@ public class Lexer {
         this.content = content.strip();
         this.lines = this.content.split("\r\n");
         this.macros = new HashMap<>();
+        this.includes = new ArrayList<>();
         this.instructions = new LinkedList<>();
     }
 
@@ -78,20 +81,35 @@ public class Lexer {
 
                 String path = words[1];
 
-                File file = new File(path);
-                if(!file.exists()){
+                if(includes.contains(path)){
                     continue;
                 }
+
+                String content = "";
 
                 try {
-                    String content = Files.readString(Path.of(path));
-                    Lexer lexer = new Lexer(content);
-                    instructions.addAll(lexer.lex());
-                    macros.putAll(lexer.getMacros());
-                } catch (IOException e) {
-                    continue;
+                    InputStream in = Lexer.class.getResourceAsStream("/std/" + path);
+                    if(in != null) {
+                        content = new String(in.readAllBytes());
+                    }
+                } catch (Exception ignored){ }
+
+                if(content.length() == 0){
+                    try {
+                        File file = new File(path);
+                        if(!file.exists()){
+                            continue;
+                        }
+                        content = Files.readString(Path.of(path));
+                    } catch (IOException e) { }
                 }
 
+                Lexer lexer = new Lexer(content);
+                lexer.getMacros().putAll(macros);
+                instructions.addAll(lexer.lex());
+
+                macros.putAll(lexer.getMacros());
+                includes.add(path);
                 continue;
             }
 
@@ -124,6 +142,10 @@ public class Lexer {
 
     public String[] getLines() {
         return lines;
+    }
+
+    public List<String> getIncludes() {
+        return includes;
     }
 
     public LinkedList<Instruction> getInstructions() {
