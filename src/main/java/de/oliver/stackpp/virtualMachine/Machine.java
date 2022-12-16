@@ -13,8 +13,7 @@ public class Machine {
     public Machine() {
         this.stack = new Stack<>();
         this.registers = new HashMap<>();
-        this.memory = new Memory(1024);
-
+        this.memory = new Memory(1024*100);
         init();
     }
 
@@ -24,6 +23,7 @@ public class Machine {
         registers.put("c", new Register<>("c", 0));
         registers.put("d", new Register<>("d", 0));
         registers.put("e", new Register<>("e", 0));
+        registers.put("i", new Register<>("i", 0));
     }
 
     public void runProgram(Program program){

@@ -21,6 +21,8 @@ public enum Token {
     END("end"),
     MEM_GET("memget"),
     MEM_SET("memset"),
+    MEM_ALLOC("malloc"),
+    MEM_FREE("free"),
     EXIT("exit"),
 
     EQUAL_SIGN("="),
