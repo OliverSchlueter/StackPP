@@ -18,12 +18,24 @@ public class Machine {
     }
 
     private void init(){
+        // registers for calculating
         registers.put("a", new Register<>("a", 0));
         registers.put("b", new Register<>("b", 0));
         registers.put("c", new Register<>("c", 0));
         registers.put("d", new Register<>("d", 0));
         registers.put("e", new Register<>("e", 0));
+
+        // registers as indexes
         registers.put("i", new Register<>("i", 0));
+        registers.put("j", new Register<>("j", 0));
+        registers.put("k", new Register<>("k", 0));
+
+        // registers for function inputs
+        registers.put("f1", new Register<>("f1", 0));
+        registers.put("f2", new Register<>("f2", 0));
+        registers.put("f3", new Register<>("f3", 0));
+        registers.put("f4", new Register<>("f4", 0));
+        registers.put("f5", new Register<>("f5", 0));
     }
 
     public void runProgram(Program program){
