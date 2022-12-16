@@ -6,10 +6,7 @@ import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.operations.impl.ExitOperation;
 import de.oliver.stackpp.operations.impl.arithmetic.*;
 import de.oliver.stackpp.operations.impl.block.*;
-import de.oliver.stackpp.operations.impl.memory.MemoryAllocOperation;
-import de.oliver.stackpp.operations.impl.memory.MemoryFreeOperation;
-import de.oliver.stackpp.operations.impl.memory.MemoryGetOperation;
-import de.oliver.stackpp.operations.impl.memory.MemorySetOperation;
+import de.oliver.stackpp.operations.impl.memory.*;
 import de.oliver.stackpp.operations.impl.register.AsciiPrintOperation;
 import de.oliver.stackpp.operations.impl.register.MoveOperation;
 import de.oliver.stackpp.operations.impl.register.PrintOperation;
@@ -177,6 +174,8 @@ public class Parser {
                 Function<Program, Integer> ptr = getValueFromString(instruction.args()[0]);
                 operation = new MemoryFreeOperation(program, ptr);
             }
+
+            case MEM_DUMP -> operation = new MemoryDumpOperation(program);
 
             case EXIT -> {
                 Function<Program, Integer> exitCode = getValueFromString(instruction.args()[0]);

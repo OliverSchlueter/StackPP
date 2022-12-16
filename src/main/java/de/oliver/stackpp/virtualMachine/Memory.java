@@ -1,5 +1,7 @@
 package de.oliver.stackpp.virtualMachine;
 
+import org.apache.commons.lang3.CharUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,11 +54,45 @@ public class Memory {
     }
     
     public void dump(){
-        for (int i = 0; i < memory.length; i++) {
-            System.out.print(memory[i]);
-        }
+        // print header
+        System.out.println("           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F");
 
-        System.out.println();
+        for (int row = 0; row < memory.length/16; row++) {
+
+            // if row is only filled with '0x00' then skip
+            boolean isOnlyZeros = true;
+            for (int col = 0; col < 16; col++) {
+                if(memory[row*16+col] != 0){
+                    isOnlyZeros = false;
+                    break;
+                }
+            }
+
+            if(isOnlyZeros){
+                continue;
+            }
+
+            // print row location
+            System.out.printf("%07x0  ", row);
+
+            // print values in row
+            for (int col = 0; col < 16; col++) {
+                System.out.printf("%02x ", memory[row*16+col]);
+            }
+
+            // print as ascii char
+            System.out.print(" |");
+            for (int col = 0; col < 16; col++) {
+                char ascii = (char)memory[row*16+col];
+
+                boolean printable = CharUtils.isAsciiPrintable(ascii);
+                System.out.print(printable ? ascii : ".");
+            }
+            System.out.print("|");
+
+            // print new line
+            System.out.println();
+        }
     }
 
     private void checkIndexBounds(int i){

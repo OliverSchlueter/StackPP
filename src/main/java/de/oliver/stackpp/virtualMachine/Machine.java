@@ -13,7 +13,7 @@ public class Machine {
     public Machine() {
         this.stack = new Stack<>();
         this.registers = new HashMap<>();
-        this.memory = new Memory(1024*100);
+        this.memory = new Memory(1024);
         init();
     }
 
