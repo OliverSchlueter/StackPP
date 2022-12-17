@@ -1,26 +1,32 @@
-#INCLUDE string.spp
+#INCLUDE stdlib.spp
 
-malloc 7    ; allocate 7 bytes
+malloc 8    ; allocate 8 bytes
 pop a       ; put the ptr into 'a'
+push a      ; push the ptr back to stack but keep it in 'a'
 
-move a b    ; copy the ptr to 'b'
+memset a ASCII_UPPERCASE_O  ; write "O" to memory
+add a 1                     ; jump to next address
 
-; write "Oliver" into memory
-memset b ASCII_UPPERCASE_O
-add b 1
-memset b ASCII_LOWERCASE_L
-add b 1
-memset b ASCII_LOWERCASE_I
-add b 1
-memset b ASCII_LOWERCASE_V
-add b 1
-memset b ASCII_LOWERCASE_E
-add b 1
-memset b ASCII_LOWERCASE_R
-add b 1
-memset b 0  ; null-terminate the string
+memset a ASCII_LOWERCASE_L
+add a 1
 
-move a f1           ; pass the ptr to the function
-call println        ; call the print-string function
+memset a ASCII_LOWERCASE_I
+add a 1
 
-free a
+memset a ASCII_LOWERCASE_V
+add a 1
+
+memset a ASCII_LOWERCASE_E
+add a 1
+
+memset a ASCII_LOWERCASE_R
+add a 1
+
+memset a ASCII_CR
+add a 1
+
+memset a ASCII_NULL     ; null-terminate the string
+add a 1
+
+pop f1          ; put the ptr into 'f1' register
+call print      ; call the print function

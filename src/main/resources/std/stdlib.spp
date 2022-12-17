@@ -1,0 +1,31 @@
+#INCLUDE ascii.spp
+
+; exits the program
+; f1 - the exit code
+function exit
+    move f1 a
+    syscall 1
+end
+
+
+; prints a buffer to standard output
+; note that the string must be null-terminated
+; f1 - the pointer to the start of the buffer
+function print
+    move 1 i
+
+    while i = 1
+        memget c    ; read char
+        pop b       ; put char in 'b'
+
+        if b = ASCII_NULL   ; check if char is NULL
+            move 0 i        ; exit loop
+        end
+
+        add c 1     ; increase counter
+    end
+
+    move 1 a    ; use standard output
+    move f1 b
+    syscall 2
+end

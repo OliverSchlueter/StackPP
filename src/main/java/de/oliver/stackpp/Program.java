@@ -1,8 +1,9 @@
-package de.oliver.stackpp.virtualMachine;
+package de.oliver.stackpp;
 
 
 import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.operations.impl.block.FunctionOperation;
+import de.oliver.stackpp.virtualMachine.Machine;
 
 import java.util.HashMap;
 import java.util.LinkedList;

@@ -1,6 +1,6 @@
 package de.oliver.stackpp.operations;
 
-import de.oliver.stackpp.virtualMachine.Program;
+import de.oliver.stackpp.Program;
 
 import java.util.Queue;
 

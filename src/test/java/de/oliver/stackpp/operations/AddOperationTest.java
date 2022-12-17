@@ -2,7 +2,7 @@ package de.oliver.stackpp.operations;
 
 import de.oliver.stackpp.operations.impl.arithmetic.AddOperation;
 import de.oliver.stackpp.virtualMachine.Machine;
-import de.oliver.stackpp.virtualMachine.Program;
+import de.oliver.stackpp.Program;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

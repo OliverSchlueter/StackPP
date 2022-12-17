@@ -1,7 +1,7 @@
 package de.oliver.stackpp.operations;
 
 
-import de.oliver.stackpp.virtualMachine.Program;
+import de.oliver.stackpp.Program;
 
 public abstract class Operation {
 

@@ -1,5 +1,10 @@
 package de.oliver.stackpp.virtualMachine;
 
+import de.oliver.stackpp.Program;
+import de.oliver.stackpp.virtualMachine.syscalls.Syscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.ExitSyscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.PrintSyscall;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -8,11 +13,13 @@ public class Machine {
 
     private final Stack<Integer> stack;
     private final Map<String, Register<Integer>> registers;
+    private final Map<Integer, Syscall> syscalls;
     private final Memory memory;
 
     public Machine() {
         this.stack = new Stack<>();
         this.registers = new HashMap<>();
+        this.syscalls = new HashMap<>();
         this.memory = new Memory(1024);
         init();
     }
@@ -36,6 +43,10 @@ public class Machine {
         registers.put("f3", new Register<>("f3", 0));
         registers.put("f4", new Register<>("f4", 0));
         registers.put("f5", new Register<>("f5", 0));
+
+        // syscalls
+        syscalls.put(1, new ExitSyscall(1, this));
+        syscalls.put(2, new PrintSyscall(2, this));
     }
 
     public void runProgram(Program program){
@@ -64,6 +75,18 @@ public class Machine {
     public Register<Integer> getRegister(String name){
         if(registers.containsKey(name)){
             return registers.get(name);
+        }
+
+        return null;
+    }
+
+    public Map<Integer, Syscall> getSyscalls() {
+        return syscalls;
+    }
+
+    public Syscall getSyscall(int id){
+        if(syscalls.containsKey(id)){
+            return syscalls.get(id);
         }
 
         return null;

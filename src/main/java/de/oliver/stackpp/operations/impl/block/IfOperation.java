@@ -3,7 +3,7 @@ package de.oliver.stackpp.operations.impl.block;
 import de.oliver.stackpp.Token;
 import de.oliver.stackpp.operations.BlockOperation;
 import de.oliver.stackpp.operations.Operation;
-import de.oliver.stackpp.virtualMachine.Program;
+import de.oliver.stackpp.Program;
 
 import java.util.LinkedList;
 import java.util.Queue;

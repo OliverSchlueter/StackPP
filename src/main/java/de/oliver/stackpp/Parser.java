@@ -3,7 +3,7 @@ package de.oliver.stackpp;
 import de.oliver.stackpp.operations.BlockOperation;
 import de.oliver.stackpp.operations.CompileOperation;
 import de.oliver.stackpp.operations.Operation;
-import de.oliver.stackpp.operations.impl.ExitOperation;
+import de.oliver.stackpp.operations.impl.SyscallOperation;
 import de.oliver.stackpp.operations.impl.arithmetic.*;
 import de.oliver.stackpp.operations.impl.block.*;
 import de.oliver.stackpp.operations.impl.memory.*;
@@ -13,7 +13,6 @@ import de.oliver.stackpp.operations.impl.register.PrintOperation;
 import de.oliver.stackpp.operations.impl.stack.PopOperation;
 import de.oliver.stackpp.operations.impl.stack.PrintStackOperation;
 import de.oliver.stackpp.operations.impl.stack.PushOperation;
-import de.oliver.stackpp.virtualMachine.Program;
 import de.oliver.stackpp.virtualMachine.Register;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -177,10 +176,9 @@ public class Parser {
 
             case MEM_DUMP -> operation = new MemoryDumpOperation(program);
 
-            case EXIT -> {
-                Function<Program, Integer> exitCode = getValueFromString(instruction.args()[0]);
-
-                operation = new ExitOperation(program, exitCode);
+            case SYSCALL -> {
+                Function<Program, Integer> id = getValueFromString(instruction.args()[0]);
+                operation = new SyscallOperation(program, id);
             }
 
             default -> throw new NoSuchElementException("Could not find operation token");

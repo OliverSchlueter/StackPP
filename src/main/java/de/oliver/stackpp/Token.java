@@ -24,7 +24,7 @@ public enum Token {
     MEM_ALLOC("malloc"),
     MEM_FREE("free"),
     MEM_DUMP("memdump"),
-    EXIT("exit"),
+    SYSCALL("syscall"),
 
     EQUAL_SIGN("="),
     GREATER_SIGN(">"),

@@ -1,7 +1,6 @@
 package de.oliver.stackpp;
 
 import de.oliver.stackpp.virtualMachine.Machine;
-import de.oliver.stackpp.virtualMachine.Program;
 
 import java.io.IOException;
 import java.nio.file.Files;
