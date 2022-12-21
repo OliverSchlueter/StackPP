@@ -5,8 +5,7 @@ import de.oliver.stackpp.operations.CompileOperation;
 import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.operations.impl.SyscallOperation;
 import de.oliver.stackpp.operations.impl.arithmetic.*;
-import de.oliver.stackpp.operations.impl.bitwise.LeftShiftOperation;
-import de.oliver.stackpp.operations.impl.bitwise.RightShiftOperation;
+import de.oliver.stackpp.operations.impl.bitwise.*;
 import de.oliver.stackpp.operations.impl.block.*;
 import de.oliver.stackpp.operations.impl.memory.*;
 import de.oliver.stackpp.operations.impl.register.AsciiPrintOperation;
@@ -93,7 +92,7 @@ public class Parser {
                 operation = new MoveOperation(program, a, b);
             }
 
-            case ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO, LEFT_SHIFT, RIGHT_SHIFT -> {
+            case ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO, LEFT_SHIFT, RIGHT_SHIFT, BITWISE_AND, BITWISE_OR, BITWISE_XOR -> {
                 String aStr = instruction.args()[0];
                 String bStr = instruction.args()[1];
 
@@ -108,7 +107,15 @@ public class Parser {
                     case MODULO -> operation = new ModuloOperation(program, a, b);
                     case LEFT_SHIFT -> operation = new LeftShiftOperation(program, a, b);
                     case RIGHT_SHIFT -> operation = new RightShiftOperation(program, a, b);
+                    case BITWISE_AND -> operation = new AndOperation(program, a, b);
+                    case BITWISE_OR -> operation = new OrOperation(program, a, b);
+                    case BITWISE_XOR -> operation = new XorOperation(program, a, b);
                 }
+            }
+
+            case BITWISE_NOT -> {
+                Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
+                operation = new NotOperation(program, a);
             }
 
             case PRINT -> {
