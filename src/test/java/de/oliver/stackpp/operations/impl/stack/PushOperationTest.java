@@ -1,10 +1,12 @@
-package de.oliver.stackpp.operations;
+package de.oliver.stackpp.operations.impl.stack;
 
-import de.oliver.stackpp.operations.impl.stack.PushOperation;
-import de.oliver.stackpp.virtualMachine.Machine;
 import de.oliver.stackpp.Program;
+import de.oliver.stackpp.operations.Operation;
+import de.oliver.stackpp.virtualMachine.Machine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class PushOperationTest {
 
@@ -20,6 +22,6 @@ class PushOperationTest {
         Operation operation = new PushOperation(program, p -> 5);
         operation.execute();
 
-        assert program.getMachine().getStack().size() > 0 && program.getMachine().getStack().pop() == 5;
+        assert program.getMachine().getStack().pop() == 5;
     }
 }

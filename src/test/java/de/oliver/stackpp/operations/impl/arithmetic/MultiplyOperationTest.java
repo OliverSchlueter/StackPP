@@ -1,8 +1,8 @@
-package de.oliver.stackpp.operations;
+package de.oliver.stackpp.operations.impl.arithmetic;
 
-import de.oliver.stackpp.operations.impl.arithmetic.MultiplyOperation;
-import de.oliver.stackpp.virtualMachine.Machine;
 import de.oliver.stackpp.Program;
+import de.oliver.stackpp.operations.Operation;
+import de.oliver.stackpp.virtualMachine.Machine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
