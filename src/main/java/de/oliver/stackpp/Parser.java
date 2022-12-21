@@ -5,6 +5,8 @@ import de.oliver.stackpp.operations.CompileOperation;
 import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.operations.impl.SyscallOperation;
 import de.oliver.stackpp.operations.impl.arithmetic.*;
+import de.oliver.stackpp.operations.impl.bitwise.LeftShiftOperation;
+import de.oliver.stackpp.operations.impl.bitwise.RightShiftOperation;
 import de.oliver.stackpp.operations.impl.block.*;
 import de.oliver.stackpp.operations.impl.memory.*;
 import de.oliver.stackpp.operations.impl.register.AsciiPrintOperation;
@@ -91,7 +93,7 @@ public class Parser {
                 operation = new MoveOperation(program, a, b);
             }
 
-            case ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO -> {
+            case ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO, LEFT_SHIFT, RIGHT_SHIFT -> {
                 String aStr = instruction.args()[0];
                 String bStr = instruction.args()[1];
 
@@ -104,6 +106,8 @@ public class Parser {
                     case MULTIPLY -> operation = new MultiplyOperation(program, a, b);
                     case DIVIDE -> operation = new DivideOperation(program, a, b);
                     case MODULO -> operation = new ModuloOperation(program, a, b);
+                    case LEFT_SHIFT -> operation = new LeftShiftOperation(program, a, b);
+                    case RIGHT_SHIFT -> operation = new RightShiftOperation(program, a, b);
                 }
             }
 

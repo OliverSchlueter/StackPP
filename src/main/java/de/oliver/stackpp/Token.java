@@ -10,6 +10,8 @@ public enum Token {
     MULTIPLY("multiply"),
     DIVIDE("divide"),
     MODULO("modulo"),
+    LEFT_SHIFT("lshift"),
+    RIGHT_SHIFT("rshift"),
     PRINT("print"),
     ASCII_PRINT("aprint"),
     PRINT_STACK("prints"),
