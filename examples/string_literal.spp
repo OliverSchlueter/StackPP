@@ -1,0 +1,10 @@
+#INCLUDE stdlib.spp
+
+str hello world     ; allocates a chunk of memory and saves the chars in it. Then pushes the size of the string and the pointer to the stack
+
+pop a       ; get the size (we don't really need it)
+pop b       ; get the pointer to the string
+
+move b f1   ; put the ptr in 'f1'
+
+call print  ; print the string
