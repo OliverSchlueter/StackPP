@@ -11,6 +11,6 @@ pop     b       ; puts the top element of the stack into the 'b' register
 
 add     a b     ; adds the values in the 'a' and 'b' registers
 
-pushreg a       ; push the value of the 'a' register onto the stack
+push    a       ; push the value of the 'a' register onto the stack
 
 prints          ; print all elements that are on the stack
