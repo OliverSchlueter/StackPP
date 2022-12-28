@@ -28,3 +28,16 @@ $ java -jar StackPP.jar [path to .spp file]
 ## Documentation
 
 You can find the documentation for the Stack++ language in ``StackPP.md``.
+
+You can find a bunch of examples in the ``examples/`` directory.
+
+## Roadmap
+
+- [x] Stack operations
+- [x] Simple calculations
+- [x] Conditions
+- [x] Functions
+- [x] Memory access
+- [ ] Read and edit files (wip)
+- [ ] Simple graphics
+- [ ] Internet (not sure yet)
