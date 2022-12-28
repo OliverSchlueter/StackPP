@@ -47,6 +47,16 @@ public class Memory {
         return memory[i];
     }
 
+    public long amountUsedMemory(){
+        long amount = 0;
+
+        for (AllocatedMemory mem : allocatedMemory) {
+            amount += mem.getSize();
+        }
+
+        return amount;
+    }
+
     public void setAt(int i, byte val){
         checkIndexBounds(i);
 
@@ -54,6 +64,15 @@ public class Memory {
     }
     
     public void dump(){
+        long totalMemory = memory.length;
+        long usedMemory = amountUsedMemory();
+        long freeMemory = totalMemory - usedMemory;
+        System.out.println("Total memory: " + totalMemory + " bytes");
+        System.out.println("Used memory: " + usedMemory + " bytes");
+        System.out.println("Free memory: " + freeMemory + " bytes");
+
+        System.out.println();
+
         // print header
         System.out.println("           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F");
 

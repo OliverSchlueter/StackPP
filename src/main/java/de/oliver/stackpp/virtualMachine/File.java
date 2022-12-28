@@ -7,7 +7,6 @@ public class File {
     private int dataPtr;
     private int size;
 
-
     public File(String name, String path, int dataPtr, int size) {
         this.name = name;
         this.path = path;

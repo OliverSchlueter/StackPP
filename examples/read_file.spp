@@ -2,8 +2,10 @@
 
 str D:\Workspaces\Java\StackPP\build\libs\test.txt
 
-pop a
+pop a   ; the size (we can ignore)
 pop a   ; the ptr to the path
+
+push a  ; push path (for later)
 
 syscall 3   ; open file
 
@@ -12,6 +14,11 @@ pop d   ; size of file content
 
 memdump     ; you can see that the content is saved into memory
 
-move c f1
-move d f2
+move c f1       ; param for function
+move d f2       ; param for function
 call print_buf  ; print content of the file
+
+pop a       ; the path
+syscall 4   ; close file
+
+memdump     ; you can see that now the memory is free again
