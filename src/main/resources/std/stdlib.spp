@@ -29,3 +29,13 @@ function print
     move f1 b
     syscall 2
 end
+
+; prints a buffer to standard output
+; f1 - the pointer to the start of the buffer
+; f2 - the size of the buffer
+function print_buf
+    move 1 a    ; use standard output
+    move f1 b
+    move f2 c
+    syscall 2
+end

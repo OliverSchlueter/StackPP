@@ -1,0 +1,17 @@
+#INCLUDE stdlib.spp
+
+str D:\Workspaces\Java\StackPP\build\libs\test.txt
+
+pop a
+pop a   ; the ptr to the path
+
+syscall 3   ; open file
+
+pop c   ; ptr to file content
+pop d   ; size of file content
+
+memdump     ; you can see that the content is saved into memory
+
+move c f1
+move d f2
+call print_buf  ; print content of the file

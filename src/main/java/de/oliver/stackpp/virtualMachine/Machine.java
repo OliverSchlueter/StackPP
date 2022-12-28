@@ -4,10 +4,9 @@ import de.oliver.stackpp.Program;
 import de.oliver.stackpp.virtualMachine.syscalls.Syscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.ExitSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.PrintSyscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.files.OpenFileSyscall;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class Machine {
 
@@ -15,12 +14,14 @@ public class Machine {
     private final Map<String, Register<Integer>> registers;
     private final Map<Integer, Syscall> syscalls;
     private final Memory memory;
+    private final Map<String, File> openedFiles; // path -> file
 
     public Machine() {
         this.stack = new Stack<>();
         this.registers = new HashMap<>();
         this.syscalls = new HashMap<>();
         this.memory = new Memory(1024);
+        this.openedFiles = new HashMap<>();
         init();
     }
 
@@ -47,6 +48,7 @@ public class Machine {
         // syscalls
         syscalls.put(1, new ExitSyscall(1, this));
         syscalls.put(2, new PrintSyscall(2, this));
+        syscalls.put(3, new OpenFileSyscall(3, this));
     }
 
     public void runProgram(Program program){
@@ -94,5 +96,9 @@ public class Machine {
 
     public Memory getMemory() {
         return memory;
+    }
+
+    public Map<String, File> getOpenedFiles() {
+        return openedFiles;
     }
 }

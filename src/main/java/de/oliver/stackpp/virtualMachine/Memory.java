@@ -38,7 +38,7 @@ public class Memory {
     }
 
     public void free(int ptr){
-        allocatedMemory.removeIf(am -> am.ptr() == ptr);
+        allocatedMemory.removeIf(am -> am.getPtr() == ptr);
     }
 
     public byte getAt(int i){
@@ -100,12 +100,4 @@ public class Memory {
             throw new IndexOutOfBoundsException(i);
         }
     }
-}
-
-record AllocatedMemory(int ptr, int size) {
-
-    public boolean isInRange(int i){
-        return !(i < ptr || i >= (ptr + size));
-    }
-
 }
