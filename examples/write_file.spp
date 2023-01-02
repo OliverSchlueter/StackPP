@@ -1,0 +1,16 @@
+#INCLUDE stdlib.spp
+
+str D:\Workspaces\Java\StackPP\build\libs\test.txt
+
+pop a   ; the size (we can ignore)
+pop a   ; the ptr to the path
+
+str hello world     ; the data to save in the file
+pop c   ; ptr
+pop b   ; size
+
+subtract c 1    ; remove the '\0' at the end
+
+move 0 d    ; offset
+
+syscall 5   ; write file syscall

@@ -39,3 +39,15 @@ function print_buf
     move f2 c
     syscall 2
 end
+
+; writes a buffer of chars/bytes into a file
+; f1 - pointer to the path
+; f2 - pointer to the data
+; f3 - size of the data
+function write_file
+    move f1 a
+    move f2 b
+    move f3 c
+    move 0 d    ; offset
+    syscall 5   ; write file syscall
+end

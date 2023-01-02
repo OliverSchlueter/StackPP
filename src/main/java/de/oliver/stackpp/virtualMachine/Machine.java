@@ -6,6 +6,7 @@ import de.oliver.stackpp.virtualMachine.syscalls.impl.ExitSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.PrintSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.CloseFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.OpenFileSyscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.files.WriteFileSyscall;
 
 import java.util.*;
 
@@ -51,6 +52,7 @@ public class Machine {
         syscalls.put(2, new PrintSyscall(2, this));
         syscalls.put(3, new OpenFileSyscall(3, this));
         syscalls.put(4, new CloseFileSyscall(4, this));
+        syscalls.put(5, new WriteFileSyscall(5, this));
     }
 
     public void runProgram(Program program){

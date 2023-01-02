@@ -38,6 +38,6 @@ You can find a bunch of examples in the ``examples/`` directory.
 - [x] Conditions
 - [x] Functions
 - [x] Memory access
-- [ ] Read and edit files (wip)
+- [x] Read and write files
 - [ ] Simple graphics
 - [ ] Internet (not sure yet)
