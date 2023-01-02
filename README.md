@@ -39,5 +39,5 @@ You can find a bunch of examples in the ``examples/`` directory.
 - [x] Functions
 - [x] Memory access
 - [x] Read and write files
-- [ ] Simple graphics
+- [ ] Simple graphics (wip, see [GameEngine](https://github.com/OliverSchlueter/GameEngine))
 - [ ] Internet (not sure yet)
