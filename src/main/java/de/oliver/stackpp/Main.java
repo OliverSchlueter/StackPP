@@ -18,8 +18,8 @@ public class Main {
         } else {
             content = String.join("\r\n",
                     "",
-                    "#INCLUDE ascii.spp",
-                    "aprint ASCII_UPPERCASE_L",
+                    "#INCLUDE stdlib.spp",
+                    "syscall 6",
                     ""
                     );
         }
