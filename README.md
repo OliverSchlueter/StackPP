@@ -39,5 +39,13 @@ You can find a bunch of examples in the ``examples/`` directory.
 - [x] Functions
 - [x] Memory access
 - [x] Read and write files
-- [ ] Simple graphics (wip, see [GameEngine](https://github.com/OliverSchlueter/GameEngine))
+- [ ] Simple graphics (wip)
+    - [x] import [GameEngine](https://github.com/OliverSchlueter/GameEngine)
+    - [x] show window
+    - [ ] set title
+    - [ ] set width and height
+    - [ ] set background color
+    - [ ] draw rectangle with color
+  - [ ] draw texture
+  - [ ] draw text
 - [ ] Internet (not sure yet)
