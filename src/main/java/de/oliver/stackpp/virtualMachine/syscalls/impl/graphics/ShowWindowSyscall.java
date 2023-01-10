@@ -8,6 +8,8 @@ import org.joml.Vector4f;
 
 public class ShowWindowSyscall extends Syscall {
 
+    private Thread windowThread;
+
     public ShowWindowSyscall(int id, Machine machine) {
         super(id, machine);
     }
@@ -33,7 +35,17 @@ public class ShowWindowSyscall extends Syscall {
             i++;
         }
 
-        Window.create(width, height, path, new Vector4f(0, 0, 0, 1));
-        Window.get().run();
+        String finalPath = path;
+        windowThread = new Thread(() -> {
+            Window.create(width, height, finalPath, new Vector4f(0, 0, 0, 1));
+            Window.get().setCurrentScene(MyScene.getInstance());
+            Window.get().run();
+        });
+
+        windowThread.start();
+    }
+
+    public Thread getWindowThread() {
+        return windowThread;
     }
 }

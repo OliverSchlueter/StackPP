@@ -4,6 +4,7 @@ package de.oliver.stackpp;
 import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.operations.impl.block.FunctionOperation;
 import de.oliver.stackpp.virtualMachine.Machine;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.ShowWindowSyscall;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,6 +40,15 @@ public class Program {
         while (!exit && !instructions.isEmpty()) {
             Operation operation = instructions.poll();
             operation.execute();
+        }
+
+        ShowWindowSyscall showWindowSyscall = (ShowWindowSyscall)m.getSyscall(6);
+        if(showWindowSyscall.getWindowThread() != null){
+            try {
+                showWindowSyscall.getWindowThread().join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return exitCode;
