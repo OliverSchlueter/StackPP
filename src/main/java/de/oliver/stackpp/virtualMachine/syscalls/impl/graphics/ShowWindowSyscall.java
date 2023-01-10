@@ -19,10 +19,10 @@ public class ShowWindowSyscall extends Syscall {
         int width = machine.getRegister("a").getValue();
         int height = machine.getRegister("b").getValue();
 
-        int pathPtr = machine.getRegister("c").getValue();
-        String path = "";
+        int titlePtr = machine.getRegister("c").getValue();
+        String title = "";
 
-        int i = pathPtr;
+        int i = titlePtr;
         while (true){
             char c = (char) machine.getMemory().getAt(i);
 
@@ -30,14 +30,14 @@ public class ShowWindowSyscall extends Syscall {
                 break;
             }
 
-            path += c;
+            title += c;
 
             i++;
         }
 
-        String finalPath = path;
+        String finalTitle = title;
         windowThread = new Thread(() -> {
-            Window.create(width, height, finalPath, new Vector4f(0, 0, 0, 1));
+            Window.create(width, height, finalTitle, new Vector4f(0, 0, 0, 1));
             Window.get().setCurrentScene(MyScene.getInstance());
             Window.get().run();
         });
