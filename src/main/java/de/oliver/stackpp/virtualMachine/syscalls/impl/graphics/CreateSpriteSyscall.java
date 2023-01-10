@@ -16,6 +16,13 @@ public class CreateSpriteSyscall extends Syscall {
         super(id, machine);
     }
 
+    /**
+     * Creates a new gameobject with a sprite
+     *  'a' - x position
+     *  'b' - y position
+     *  'c' - width
+     *  'd' - height
+     */
     @Override
     public void execute(Program program) {
         int xPos = machine.getRegister("a").getValue();

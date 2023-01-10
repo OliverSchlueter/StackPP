@@ -13,6 +13,12 @@ public class EditSpriteSyscall extends Syscall {
         super(id, machine);
     }
 
+    /**
+     * This syscall can edit several attributes of a gameobject
+     *  'a' - action id
+     *  'b' - gameobject id
+     *  'c' - value
+     */
     @Override
     public void execute(Program program) {
         int actionId = machine.getRegister("a").getValue();
