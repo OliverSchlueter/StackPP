@@ -16,4 +16,5 @@ function color_to_int
 
     or f1 f2
     or f1 f3
+    or f1 f4
 end
