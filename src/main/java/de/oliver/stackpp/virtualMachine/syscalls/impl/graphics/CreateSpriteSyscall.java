@@ -33,6 +33,8 @@ public class CreateSpriteSyscall extends Syscall {
         );
 
         gameObject.addComponent(new SpriteComponent(new Vector4f(1, 1, 1, 1)));
-        MyScene.getInstance().addGameObject(gameObject);
+
+        int id = MyScene.getInstance().addGameObjectFromProgram(gameObject);
+        machine.getStack().push(id);
     }
 }

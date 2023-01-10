@@ -8,6 +8,7 @@ import de.oliver.stackpp.virtualMachine.syscalls.impl.files.CloseFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.OpenFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.WriteFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.CreateSpriteSyscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.EditSpriteSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.ShowWindowSyscall;
 
 import java.util.*;
@@ -60,6 +61,7 @@ public class Machine {
 
         syscalls.put(6, new ShowWindowSyscall(6, this));
         syscalls.put(7, new CreateSpriteSyscall(7, this));
+        syscalls.put(8, new EditSpriteSyscall(8, this));
     }
 
     public void runProgram(Program program){
