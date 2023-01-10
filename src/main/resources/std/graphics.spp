@@ -1,0 +1,19 @@
+function color_to_int
+    ; color =
+    ; ((int) (a * 255.0f) << 24) |
+    ; ((int) (r * 255.0f) << 16) |
+    ; ((int) (g * 255.0f) << 8)  |
+    ; ((int) (b * 255.0f) << 0);
+
+    multiply f1 255
+    multiply f2 255
+    multiply f3 255
+    multiply f4 255
+
+    lshift f1 24
+    lshift f2 16
+    lshift f3 8
+
+    or f1 f2
+    or f1 f3
+end
