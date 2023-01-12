@@ -7,6 +7,8 @@ import de.oliver.stackpp.virtualMachine.Machine;
 import de.oliver.stackpp.virtualMachine.syscalls.Syscall;
 import org.joml.Vector4f;
 
+import java.util.Vector;
+
 public class EditSpriteSyscall extends Syscall {
 
     public EditSpriteSyscall(int id, Machine machine) {
@@ -38,7 +40,7 @@ public class EditSpriteSyscall extends Syscall {
         }
     }
 
-    private static Vector4f colorFromInt(int color){
+    public static Vector4f colorFromInt(int color){
         float a = (float) ((color >> 24) & 0xff) / 255.0f;
         float r = (float) ((color >> 16) & 0xff) / 255.0f;
         float g = (float) ((color >> 8)  & 0xff) / 255.0f;
@@ -47,12 +49,16 @@ public class EditSpriteSyscall extends Syscall {
         return new Vector4f(r, g, b, a);
     }
 
-    private static int colorToInt(int r, int g, int b, int a){
+    public static int colorToInt(float r, float g, float b, float a){
         int color = ((int) (a * 255.0f) << 24) |
                     ((int) (r * 255.0f) << 16) |
                     ((int) (g * 255.0f) << 8)  |
                     ((int) (b * 255.0f) << 0);
         return color;
+    }
+
+    public static int colorToInt(Vector4f color){
+        return colorToInt(color.x, color.y, color.z, color.w);
     }
 }
 

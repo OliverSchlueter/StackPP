@@ -9,6 +9,7 @@ import de.oliver.stackpp.virtualMachine.syscalls.impl.files.OpenFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.WriteFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.CreateSpriteSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.EditSpriteSyscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.GetSpritePropertiesSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.ShowWindowSyscall;
 
 import java.util.*;
@@ -37,6 +38,7 @@ public class Machine {
         registers.put("c", new Register<>("c", 0));
         registers.put("d", new Register<>("d", 0));
         registers.put("e", new Register<>("e", 0));
+        registers.put("f", new Register<>("f", 0));
 
         // registers as indexes
         registers.put("i", new Register<>("i", 0));
@@ -62,6 +64,7 @@ public class Machine {
         syscalls.put(6, new ShowWindowSyscall(6, this));
         syscalls.put(7, new CreateSpriteSyscall(7, this));
         syscalls.put(8, new EditSpriteSyscall(8, this));
+        syscalls.put(9, new GetSpritePropertiesSyscall(9, this));
     }
 
     public void runProgram(Program program){
