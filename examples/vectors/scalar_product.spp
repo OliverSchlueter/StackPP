@@ -1,0 +1,29 @@
+#INCLUDE vec.spp
+
+; create vec1 (1, 2, 3)
+move 3 f1
+push 3
+push 2
+push 1
+call create_vec
+
+; create vec2 (4, 5, 6)
+move 3 f1
+push 6
+push 5
+push 4
+call create_vec
+
+
+pop f1  ; vec1
+pop f2  ; vec2
+
+push f1     ; push the ptrs back for further usage
+push f2
+
+move 3 f3
+
+call scalar_product
+
+pop a
+print a     ; print the result

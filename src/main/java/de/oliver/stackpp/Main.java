@@ -18,8 +18,7 @@ public class Main {
         } else {
             content = String.join("\r\n",
                     "",
-                    "#INCLUDE stdlib.spp",
-                    "syscall 6",
+                    "#INCLUDE vec.spp",
                     ""
                     );
         }

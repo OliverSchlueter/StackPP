@@ -51,6 +51,9 @@ public class Machine {
         registers.put("f3", new Register<>("f3", 0));
         registers.put("f4", new Register<>("f4", 0));
         registers.put("f5", new Register<>("f5", 0));
+        registers.put("f6", new Register<>("f6", 0));
+        registers.put("f7", new Register<>("f7", 0));
+        registers.put("f8", new Register<>("f8", 0));
 
         // syscalls
         syscalls.put(1, new ExitSyscall(1, this));

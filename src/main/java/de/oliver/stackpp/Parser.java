@@ -206,7 +206,11 @@ public class Parser {
     }
 
     private Function<Program, Byte> getByteFromString(String s){
-        return p -> Byte.parseByte(s);
+        if(NumberUtils.isNumber(s)){
+            return p -> Byte.parseByte(s);
+        } else {
+            return p -> p.getMachine().getRegister(s).getValue().byteValue();
+        }
     }
 
     private Function<Program, Register<Integer>> getRegisterFromString(String s){
