@@ -1,3 +1,5 @@
+#INCLUDE math.spp
+
 ; f1 - amount of components
 ; stack - the values of each component
 function create_vec
