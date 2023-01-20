@@ -2,6 +2,7 @@ package de.oliver.stackpp.operations.impl.block;
 
 import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.Program;
+import de.oliver.stackpp.utils.ExceptionHelper;
 
 public class CallOperation extends Operation {
 
@@ -15,6 +16,11 @@ public class CallOperation extends Operation {
     @Override
     public void execute() {
         FunctionOperation function = program.getFunctions().get(functionName);
+        if(function == null){
+            ExceptionHelper.throwException(line, "Could not find function with name: '" + functionName + "'");
+            program.exit(1);
+            return;
+        }
         function.run();
     }
 
