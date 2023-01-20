@@ -19,7 +19,7 @@ class PushOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new PushOperation(program, p -> 5);
+        Operation operation = new PushOperation(program, 0, p -> 5);
         operation.execute();
 
         assert program.getMachine().getStack().pop() == 5;

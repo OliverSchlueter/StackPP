@@ -13,15 +13,15 @@ class MultiplyOperationTest {
     @BeforeEach
     void setUp() {
         program = new Program(new Machine());
-        program.getMachine().getRegisters().get("a").setValue(5);
-        program.getMachine().getRegisters().get("b").setValue(3);
+        program.getMachine().getIntegerRegister("a").setValue(5);
+        program.getMachine().getIntegerRegister("b").setValue(3);
     }
 
     @Test
     void execute() {
-        Operation operation = new MultiplyOperation(program, p -> program.getMachine().getRegister("a"), p -> program.getMachine().getRegister("b").getValue());
+        Operation operation = new MultiplyOperation(program, 0, p -> program.getMachine().getRegister("a"), p -> program.getMachine().getRegister("b").getValue());
         operation.execute();
 
-        assert program.getMachine().getRegisters().get("a").getValue() == 15;
+        assert program.getMachine().getIntegerRegister("a").getValue() == 15;
     }
 }

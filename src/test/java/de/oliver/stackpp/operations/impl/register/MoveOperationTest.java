@@ -19,9 +19,9 @@ class MoveOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new MoveOperation(program, p -> 42, p -> p.getMachine().getRegister("a"));
+        Operation operation = new MoveOperation(program, 0, p -> 42, p -> p.getMachine().getIntegerRegister("a"));
         operation.execute();
 
-        assert program.getMachine().getRegister("a").getValue() == 42;
+        assert program.getMachine().getIntegerRegister("a").getValue() == 42;
     }
 }

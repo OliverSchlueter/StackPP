@@ -13,15 +13,15 @@ class ModuloOperationTest {
     @BeforeEach
     void setUp() {
         program = new Program(new Machine());
-        program.getMachine().getRegisters().get("a").setValue(11);
-        program.getMachine().getRegisters().get("b").setValue(5);
+        program.getMachine().getIntegerRegister("a").setValue(11);
+        program.getMachine().getIntegerRegister("b").setValue(5);
     }
 
     @Test
     void execute() {
-        Operation operation = new ModuloOperation(program, p -> program.getMachine().getRegister("a"), p -> program.getMachine().getRegister("b").getValue());
+        Operation operation = new ModuloOperation(program, 0, p -> program.getMachine().getIntegerRegister("a"), p -> program.getMachine().getIntegerRegister("b").getValue());
         operation.execute();
 
-        assert program.getMachine().getRegisters().get("a").getValue() == 1;
+        assert program.getMachine().getIntegerRegister("a").getValue() == 1;
     }
 }

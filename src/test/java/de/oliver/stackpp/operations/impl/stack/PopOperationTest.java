@@ -20,9 +20,9 @@ class PopOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new PopOperation(program, p -> p.getMachine().getRegister("a"));
+        Operation operation = new PopOperation(program, 0, p -> p.getMachine().getRegister("a"));
         operation.execute();
 
-        assert program.getMachine().getRegister("a").getValue() == 1337;
+        assert program.getMachine().getIntegerRegister("a").getValue() == 1337;
     }
 }

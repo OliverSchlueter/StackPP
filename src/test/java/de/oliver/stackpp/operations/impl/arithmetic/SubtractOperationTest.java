@@ -13,15 +13,15 @@ class SubtractOperationTest {
     @BeforeEach
     void setUp() {
         program = new Program(new Machine());
-        program.getMachine().getRegisters().get("a").setValue(6);
-        program.getMachine().getRegisters().get("b").setValue(2);
+        program.getMachine().getIntegerRegister("a").setValue(6);
+        program.getMachine().getIntegerRegister("b").setValue(2);
     }
 
     @Test
     void execute() {
-        Operation operation = new SubtractOperation(program, p -> program.getMachine().getRegister("a"), p -> program.getMachine().getRegister("b").getValue());
+        Operation operation = new SubtractOperation(program, 0, p -> program.getMachine().getIntegerRegister("a"), p -> program.getMachine().getIntegerRegister("b").getValue());
         operation.execute();
 
-        assert program.getMachine().getRegisters().get("a").getValue() == 4;
+        assert program.getMachine().getIntegerRegister("a").getValue() == 4;
     }
 }

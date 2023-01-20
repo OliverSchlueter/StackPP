@@ -19,7 +19,7 @@ class MemorySetOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new MemorySetOperation(program, p -> 7, p -> (byte)42);
+        Operation operation = new MemorySetOperation(program, 0, p -> 7, p -> (byte)42);
         operation.execute();
 
         assert program.getMachine().getMemory().getAt(7) == 42;

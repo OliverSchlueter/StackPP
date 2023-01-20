@@ -20,7 +20,7 @@ class MemoryGetOperationTest {
 
     @Test
     void execute() {
-        Operation operation = new MemoryGetOperation(program, p -> 3);
+        Operation operation = new MemoryGetOperation(program, 0, p -> 3);
         operation.execute();
 
         assert program.getMachine().getStack().pop() == 71;

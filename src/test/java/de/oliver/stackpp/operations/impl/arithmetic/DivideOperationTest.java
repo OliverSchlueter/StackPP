@@ -13,15 +13,15 @@ class DivideOperationTest {
     @BeforeEach
     void setUp() {
         program = new Program(new Machine());
-        program.getMachine().getRegisters().get("a").setValue(8);
-        program.getMachine().getRegisters().get("b").setValue(4);
+        program.getMachine().getIntegerRegister("a").setValue(8);
+        program.getMachine().getIntegerRegister("b").setValue(4);
     }
 
     @Test
     void execute() {
-        Operation operation = new DivideOperation(program, p -> program.getMachine().getRegister("a"), p -> program.getMachine().getRegister("b").getValue());
+        Operation operation = new DivideOperation(program, 0, p -> program.getMachine().getIntegerRegister("a"), p -> program.getMachine().getIntegerRegister("b").getValue());
         operation.execute();
 
-        assert program.getMachine().getRegisters().get("a").getValue() == 2;
+        assert program.getMachine().getIntegerRegister("a").getValue() == 2;
     }
 }
