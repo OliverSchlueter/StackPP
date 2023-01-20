@@ -58,7 +58,6 @@ function scalar_product
 end
 
 
-; EXPERIMENTAL!
 ; f1 - ptr to vec
 ; f2 - number of components
 function vector_length
@@ -77,6 +76,5 @@ function vector_length
     end
 
     move f3 f1
-    print f3
     call sqrt
 end

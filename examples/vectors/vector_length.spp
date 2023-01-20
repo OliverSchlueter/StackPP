@@ -1,0 +1,16 @@
+#INCLUDE vec.spp
+
+; create vec (7, 12, 5)
+move 3 f1
+push 7
+push 12
+push 5
+call create_vec
+
+
+pop f1
+move 3 f2
+call vector_length
+
+pop a
+print a
