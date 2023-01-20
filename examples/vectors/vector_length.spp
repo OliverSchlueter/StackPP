@@ -5,12 +5,12 @@ move 3 f1
 push 7
 push 12
 push 5
-call create_vec
+call vec_create
 
 
 pop f1
 move 3 f2
-call vector_length
+call vec_length
 
 pop a
 print a

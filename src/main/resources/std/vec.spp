@@ -2,7 +2,7 @@
 
 ; f1 - amount of components
 ; stack - the values of each component
-function create_vec
+function vec_create
     malloc f1
     pop f2      ; ptr to mem
     move f2 f4  ; copy ptr to f4
@@ -19,49 +19,26 @@ end
 
 ; f1 - ptr to vec
 ; f2 - number of components
-; f3 - the scalar
-function scalar_mul
+function vec_copy
+    move f2 f3
+
+    add f1 f2
+    subtract f1 1
+
     while f2 > 0
-        memget f1
-        pop f4          ; current component
-        multiply f4 f3  ; component * scalar
-        memset f1 f4
+        memget f1   ; puts value on the stack
 
-        add f1 1        ; ptr++
-        subtract f2 1   ; size--
-    end
-end
-
-; f1 - ptr to vec1
-; f2 - ptr to vec2
-; f3 - number of components
-function scalar_product
-    move 0 f4   ; current value
-
-    while f3 > 0
-
-        memget f1
-        pop f5  ; component from vec1
-
-        memget f2
-        pop f6  ; component from vec2
-
-        multiply f5 f6  ; component1 * component2
-        add f4 f5       ; current + (component1 * component2)
-
-        add f1 1        ; ptr2++
-        add f2 1        ; ptr1++
-        subtract f3 1   ; size--
+        subtract f1 1
+        subtract f2 1
     end
 
-    push f4     ; return scalar product
+    move f3 f1
+    call vec_create
 end
-
 
 ; f1 - ptr to vec
 ; f2 - number of components
-function vector_length
-
+function vec_length
     move 0 f3
 
     while f2 > 0
@@ -77,4 +54,83 @@ function vector_length
 
     move f3 f1
     call sqrt
+end
+
+; f1 - ptr to vec1
+; f2 - ptr to vec2
+; f3 - number of components
+function vec_add
+    while f3 > 0
+        memget f1
+        pop f4
+
+        memget f2
+        pop f5
+
+        add f4 f5
+        memset f1 f4
+
+        add f1 1        ; ptr1++
+        add f2 1        ; ptr2++
+        subtract f3 1   ; size--
+    end
+end
+
+; f1 - ptr to vec1
+; f2 - ptr to vec2
+; f3 - number of components
+function vec_multiply
+    while f3 > 0
+        memget f1
+        pop f4
+
+        memget f2
+        pop f5
+
+        multiply f4 f5
+        memset f1 f4
+
+        add f1 1        ; ptr1++
+        add f2 1        ; ptr2++
+        subtract f3 1   ; size--
+    end
+end
+
+; f1 - ptr to vec
+; f2 - number of components
+; f3 - the scalar
+function vec_scalar_mul
+    while f2 > 0
+        memget f1
+        pop f4          ; current component
+        multiply f4 f3  ; component * scalar
+        memset f1 f4
+
+        add f1 1        ; ptr++
+        subtract f2 1   ; size--
+    end
+end
+
+; f1 - ptr to vec1
+; f2 - ptr to vec2
+; f3 - number of components
+function vec_scalar_product
+    move 0 f4   ; current value
+
+    while f3 > 0
+        memget f1
+        pop f5  ; component from vec1
+
+        memget f2
+        pop f6  ; component from vec2
+
+        multiply f5 f6  ; component1 * component2
+        add f4 f5       ; current + (component1 * component2)
+
+        add f1 1        ; ptr2++
+        add f2 1        ; ptr1++
+        subtract f3 1   ; size--
+    end
+
+    push f4     ; return scalar product
 end

@@ -5,14 +5,14 @@ move 3 f1
 push 3
 push 2
 push 1
-call create_vec
+call vec_create
 
 ; create vec2 (4, 5, 6)
 move 3 f1
 push 6
 push 5
 push 4
-call create_vec
+call vec_create
 
 
 pop f1  ; vec1
@@ -23,7 +23,7 @@ push f2
 
 move 3 f3
 
-call scalar_product
+call vec_scalar_product
 
 pop a
 print a     ; print the result
