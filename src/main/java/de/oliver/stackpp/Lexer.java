@@ -1,5 +1,7 @@
 package de.oliver.stackpp;
 
+import de.oliver.stackpp.utils.ExceptionHelper;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -120,6 +122,12 @@ public class Lexer {
                     token = t;
                     break;
                 }
+            }
+
+            if(token == null){
+                ExceptionHelper.throwException(i+1, "Invalid token: '" + words[0] + "'");
+                System.exit(1);
+                return instructions;
             }
 
             String[] args = new String[words.length-1];
