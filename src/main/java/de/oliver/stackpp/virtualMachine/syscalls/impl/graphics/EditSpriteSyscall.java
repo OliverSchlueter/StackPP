@@ -7,8 +7,6 @@ import de.oliver.stackpp.virtualMachine.Machine;
 import de.oliver.stackpp.virtualMachine.syscalls.Syscall;
 import org.joml.Vector4f;
 
-import java.util.Vector;
-
 public class EditSpriteSyscall extends Syscall {
 
     public EditSpriteSyscall(int id, Machine machine) {
@@ -23,9 +21,9 @@ public class EditSpriteSyscall extends Syscall {
      */
     @Override
     public void execute(Program program) {
-        int actionId = machine.getRegister("a").getValue();
-        int id = machine.getRegister("b").getValue();
-        int val = machine.getRegister("c").getValue();
+        int actionId = machine.getIntegerRegister("a").getValue();
+        int id = machine.getIntegerRegister("b").getValue();
+        int val = machine.getIntegerRegister("c").getValue();
 
         Action action = Action.getActionFromId(actionId);
         GameObject gameObject = MyScene.getInstance().getGameObjectIds().get(id);

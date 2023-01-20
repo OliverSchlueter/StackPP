@@ -1,19 +1,17 @@
 #DEFINE M_PI 3.14159265358979323846
 #DEFINE M_E 2.7182818284590452354
 
-; f1 - input number
+; .a - input number
 function sqrt
-    move f1 f2
+    movef 0 .c
+    movef 1 .d
+    movef 0 .e
 
-    move 0 f3
-    move 1 f4
-    move 0 f5
-
-    while f3 < f1
-        add f5 1
-        add f3 f4
-        add f4 2
+    while .c < .a
+        addf .e 1
+        addf .c .d
+        addf .d 2
     end
 
-    push f5
+
 end

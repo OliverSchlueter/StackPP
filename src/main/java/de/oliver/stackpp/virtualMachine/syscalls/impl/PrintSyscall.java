@@ -19,9 +19,9 @@ public class PrintSyscall extends Syscall {
      */
     @Override
     public void execute(Program program) {
-        int file = machine.getRegister("a").getValue();
-        int buffer = machine.getRegister("b").getValue();
-        int size = machine.getRegister("c").getValue();
+        int file = machine.getIntegerRegister("a").getValue();
+        int buffer = machine.getIntegerRegister("b").getValue();
+        int size = machine.getIntegerRegister("c").getValue();
 
         PrintStream ps = null;
 

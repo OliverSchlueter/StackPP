@@ -16,10 +16,10 @@ public class ShowWindowSyscall extends Syscall {
 
     @Override
     public void execute(Program program) {
-        int width = machine.getRegister("a").getValue();
-        int height = machine.getRegister("b").getValue();
+        int width = machine.getIntegerRegister("a").getValue();
+        int height = machine.getIntegerRegister("b").getValue();
 
-        int titlePtr = machine.getRegister("c").getValue();
+        int titlePtr = machine.getIntegerRegister("c").getValue();
         String title = "";
 
         int i = titlePtr;

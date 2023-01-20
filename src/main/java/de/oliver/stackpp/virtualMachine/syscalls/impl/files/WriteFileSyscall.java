@@ -22,7 +22,7 @@ public class WriteFileSyscall extends Syscall {
      */
     @Override
     public void execute(Program program) {
-        int pathPtr = machine.getRegister("a").getValue();
+        int pathPtr = machine.getIntegerRegister("a").getValue();
         String path = "";
 
         int i = pathPtr;
@@ -44,9 +44,9 @@ public class WriteFileSyscall extends Syscall {
             return;
         }
 
-        int dataPtr = machine.getRegister("b").getValue();
-        int dataSize = machine.getRegister("c").getValue();
-        int offset = machine.getRegister("d").getValue();
+        int dataPtr = machine.getIntegerRegister("b").getValue();
+        int dataSize = machine.getIntegerRegister("c").getValue();
+        int offset = machine.getIntegerRegister("d").getValue();
 
         char[] data = new char[dataSize];
 

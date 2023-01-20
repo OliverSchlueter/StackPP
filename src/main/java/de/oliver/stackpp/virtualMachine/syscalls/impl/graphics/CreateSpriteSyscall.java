@@ -25,10 +25,10 @@ public class CreateSpriteSyscall extends Syscall {
      */
     @Override
     public void execute(Program program) {
-        int xPos = machine.getRegister("a").getValue();
-        int yPos = machine.getRegister("b").getValue();
-        int width = machine.getRegister("c").getValue();
-        int height = machine.getRegister("d").getValue();
+        int xPos = machine.getIntegerRegister("a").getValue();
+        int yPos = machine.getIntegerRegister("b").getValue();
+        int width = machine.getIntegerRegister("c").getValue();
+        int height = machine.getIntegerRegister("d").getValue();
 
         GameObject gameObject = new GameObject(
                 "Obj-" + System.currentTimeMillis(),

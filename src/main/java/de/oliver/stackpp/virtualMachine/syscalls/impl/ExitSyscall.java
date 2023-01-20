@@ -15,7 +15,7 @@ public class ExitSyscall extends Syscall {
      */
     @Override
     public void execute(Program program) {
-        int code = machine.getRegister("a").getValue();
+        int code = machine.getIntegerRegister("a").getValue();
         program.exit(code);
     }
 }

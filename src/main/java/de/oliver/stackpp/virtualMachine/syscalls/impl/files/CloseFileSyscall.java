@@ -13,7 +13,7 @@ public class CloseFileSyscall extends Syscall {
 
     @Override
     public void execute(Program program) {
-        int pathPtr = machine.getRegister("a").getValue();
+        int pathPtr = machine.getIntegerRegister("a").getValue();
         String path = "";
 
         int i = pathPtr;

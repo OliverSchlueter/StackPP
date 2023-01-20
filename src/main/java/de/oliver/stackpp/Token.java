@@ -3,9 +3,11 @@ package de.oliver.stackpp;
 public enum Token {
 
     MOVE("move"),
+    MOVE_FLOAT("movef"),
     PUSH("push"),
     POP("pop"),
     ADD("add"),
+    ADD_FLOAT("addf"),
     SUBTRACT("subtract"),
     MULTIPLY("multiply"),
     DIVIDE("divide"),
@@ -17,6 +19,7 @@ public enum Token {
     BITWISE_XOR("xor"),
     BITWISE_NOT("not"),
     PRINT("print"),
+    PRINT_FLOAT("fprint"),
     ASCII_PRINT("aprint"),
     PRINT_STACK("prints"),
     IF("if"),

@@ -28,7 +28,7 @@ public class Machine {
         this.intergerRegisters = new HashMap<>();
         this.floatRegisters = new HashMap<>();
         this.syscalls = new HashMap<>();
-        this.memory = new Memory(1024);
+        this.memory = new Memory(640_000); // should be enough for everyone
         this.openedFiles = new HashMap<>();
         init();
     }
@@ -56,6 +56,14 @@ public class Machine {
         intergerRegisters.put("f6", new Register<>("f6", 0));
         intergerRegisters.put("f7", new Register<>("f7", 0));
         intergerRegisters.put("f8", new Register<>("f8", 0));
+
+        // float registers
+        floatRegisters.put(".a", new Register<>(".a", 0f));
+        floatRegisters.put(".b", new Register<>(".b", 0f));
+        floatRegisters.put(".c", new Register<>(".c", 0f));
+        floatRegisters.put(".d", new Register<>(".d", 0f));
+        floatRegisters.put(".e", new Register<>(".e", 0f));
+        floatRegisters.put(".f", new Register<>(".f", 0f));
 
         // syscalls
         syscalls.put(1, new ExitSyscall(1, this));
@@ -98,14 +106,6 @@ public class Machine {
 
     public Map<String, Register<Float>> getFloatRegisters() {
         return floatRegisters;
-    }
-
-    /**
-     * @deprecated use getIntegerRegister and getFloatRegister instead
-     */
-    @Deprecated
-    public Register<Integer> getRegister(String name){
-        return getIntegerRegister(name);
     }
 
     public Register<Integer> getIntegerRegister(String name){

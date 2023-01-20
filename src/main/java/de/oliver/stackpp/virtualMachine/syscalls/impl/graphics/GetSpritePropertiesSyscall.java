@@ -14,15 +14,14 @@ public class GetSpritePropertiesSyscall extends Syscall {
 
     @Override
     public void execute(Program program) {
-        int id = machine.getRegister("a").getValue();
+        int id = machine.getIntegerRegister("a").getValue();
 
         GameObject gameObject = MyScene.getInstance().getGameObjectIds().get(id);
         SpriteComponent sprite = gameObject.getComponent(SpriteComponent.class);
 
-        machine.getRegister("b").setValue((int) gameObject.transform.position.x);
-        machine.getRegister("c").setValue((int) gameObject.transform.position.y);
-        machine.getRegister("d").setValue((int) gameObject.transform.scale.x);
-        machine.getRegister("e").setValue((int) gameObject.transform.scale.y);
-        machine.getRegister("f").setValue(EditSpriteSyscall.colorToInt(sprite.getColor()));
+        machine.getIntegerRegister("b").setValue((int) gameObject.transform.position.x);
+        machine.getIntegerRegister("c").setValue((int) gameObject.transform.position.y);
+        machine.getIntegerRegister("e").setValue((int) gameObject.transform.scale.y);
+        machine.getIntegerRegister("f").setValue(EditSpriteSyscall.colorToInt(sprite.getColor()));
     }
 }

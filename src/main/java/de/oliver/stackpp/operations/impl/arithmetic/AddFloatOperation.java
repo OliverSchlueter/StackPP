@@ -1,18 +1,17 @@
 package de.oliver.stackpp.operations.impl.arithmetic;
 
-import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.Program;
-import de.oliver.stackpp.utils.ExceptionHelper;
+import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.virtualMachine.Register;
 
 import java.util.function.Function;
 
-public class DivideOperation extends Operation {
+public class AddFloatOperation extends Operation {
 
     private final Function<Program, Register<Float>> a;
     private final Function<Program, Float> b;
 
-    public DivideOperation(Program program, int line, Function<Program, Register<Float>> a, Function<Program, Float> b) {
+    public AddFloatOperation(Program program, int line, Function<Program, Register<Float>> a, Function<Program, Float> b) {
         super(program, line);
         this.a = a;
         this.b = b;
@@ -21,15 +20,9 @@ public class DivideOperation extends Operation {
     @Override
     public void execute() {
         Register<Float> aReg = a.apply(program);
-        Float bVal = b.apply(program);
+        float bVal = b.apply(program);
 
-        if(bVal == 0){
-            ExceptionHelper.throwException(line, "Dividing by 0 is not allowed");
-            program.exit(1);
-            return;
-        }
-
-        float result = aReg.getValue() / bVal;
+        float result = aReg.getValue() + bVal;
 
         aReg.setValue(result);
     }
