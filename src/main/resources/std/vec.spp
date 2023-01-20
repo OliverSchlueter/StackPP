@@ -1,8 +1,18 @@
+#INCLUDE stdlib.spp
 #INCLUDE math.spp
 
 ; f1 - amount of components
 ; stack - the values of each component
 function vec_create
+    if f1 < 1
+        str The amount of components must be greater than 0
+        pop f2
+        pop f2
+        throw f2
+        move 1 f1
+        call exit
+    end
+
     malloc f1
     pop f2      ; ptr to mem
     move f2 f4  ; copy ptr to f4
@@ -20,6 +30,15 @@ end
 ; f1 - ptr to vec
 ; f2 - number of components
 function vec_copy
+    if f2 < 1
+        str The amount of components must be greater than 0
+        pop f2
+        pop f2
+        throw f2
+        move 1 f1
+        call exit
+    end
+
     move f2 f3
 
     add f1 f2
@@ -39,6 +58,14 @@ end
 ; f1 - ptr to vec
 ; f2 - number of components
 function vec_length
+    if f2 < 1
+        str The amount of components must be greater than 0
+        pop f2
+        pop f2
+        throw f2
+        move 1 f1
+        call exit
+    end
     move 0 f3
 
     while f2 > 0
@@ -60,6 +87,15 @@ end
 ; f2 - ptr to vec2
 ; f3 - number of components
 function vec_add
+    if f3 < 1
+        str The amount of components must be greater than 0
+        pop f2
+        pop f2
+        throw f2
+        move 1 f1
+        call exit
+    end
+
     while f3 > 0
         memget f1
         pop f4
@@ -80,6 +116,15 @@ end
 ; f2 - ptr to vec2
 ; f3 - number of components
 function vec_multiply
+    if f3 < 1
+        str The amount of components must be greater than 0
+        pop f2
+        pop f2
+        throw f2
+        move 1 f1
+        call exit
+    end
+
     while f3 > 0
         memget f1
         pop f4
@@ -100,6 +145,15 @@ end
 ; f2 - number of components
 ; f3 - the scalar
 function vec_scalar_mul
+    if f2 < 1
+        str The amount of components must be greater than 0
+        pop f2
+        pop f2
+        throw f2
+        move 1 f1
+        call exit
+    end
+
     while f2 > 0
         memget f1
         pop f4          ; current component
@@ -115,6 +169,15 @@ end
 ; f2 - ptr to vec2
 ; f3 - number of components
 function vec_scalar_product
+    if f3 < 1
+        str The amount of components must be greater than 0
+        pop f2
+        pop f2
+        throw f2
+        move 1 f1
+        call exit
+    end
+
     move 0 f4   ; current value
 
     while f3 > 0

@@ -5,6 +5,7 @@ import de.oliver.stackpp.operations.CompileOperation;
 import de.oliver.stackpp.operations.Operation;
 import de.oliver.stackpp.operations.impl.StringOperation;
 import de.oliver.stackpp.operations.impl.SyscallOperation;
+import de.oliver.stackpp.operations.impl.ThrowOperation;
 import de.oliver.stackpp.operations.impl.arithmetic.*;
 import de.oliver.stackpp.operations.impl.bitwise.*;
 import de.oliver.stackpp.operations.impl.block.*;
@@ -194,6 +195,11 @@ public class Parser {
             }
 
             case STRING -> operation = new StringOperation(program, instruction.line(), instruction.args());
+
+            case THROW -> {
+                Function<Program, Integer> msgPtr = getValueFromString(instruction.args()[0]);
+                operation = new ThrowOperation(program, instruction.line(), msgPtr);
+            }
 
             default -> throw new NoSuchElementException("Could not find operation token");
         }

@@ -32,6 +32,7 @@ public enum Token {
     MEM_DUMP("memdump"),
     SYSCALL("syscall"),
     STRING("str"),
+    THROW("throw"),
 
     EQUAL_SIGN("="),
     GREATER_SIGN(">"),
