@@ -10,8 +10,8 @@ public class MemorySetOperation extends Operation {
     private final Function<Program, Integer> index;
     private final Function<Program, Byte> value;
 
-    public MemorySetOperation(Program program, Function<Program, Integer> index, Function<Program, Byte> value) {
-        super(program);
+    public MemorySetOperation(Program program, int line, Function<Program, Integer> index, Function<Program, Byte> value) {
+        super(program, line);
         this.index = index;
         this.value = value;
     }

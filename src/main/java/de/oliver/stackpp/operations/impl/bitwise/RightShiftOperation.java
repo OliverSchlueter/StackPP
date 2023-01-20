@@ -11,8 +11,8 @@ public class RightShiftOperation extends Operation {
     private final Function<Program, Register<Integer>> a;
     private final Function<Program, Integer> amount;
 
-    public RightShiftOperation(Program program, Function<Program, Register<Integer>> a, Function<Program, Integer> amount) {
-        super(program);
+    public RightShiftOperation(Program program, int line, Function<Program, Register<Integer>> a, Function<Program, Integer> amount) {
+        super(program, line);
         this.a = a;
         this.amount = amount;
     }

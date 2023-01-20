@@ -78,19 +78,19 @@ public class Parser {
         switch (instruction.token()){
             case PUSH -> {
                 Function<Program, Integer> value = getValueFromString(instruction.args()[0]);
-                operation = new PushOperation(program, value);
+                operation = new PushOperation(program, instruction.line(), value);
             }
 
             case POP -> {
                 Function<Program, Register<Integer>> register = getRegisterFromString(instruction.args()[0]);
-                operation = new PopOperation(program, register);
+                operation = new PopOperation(program, instruction.line(), register);
             }
 
             case MOVE -> {
                 Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
                 Function<Program, Register<Integer>> b = getRegisterFromString(instruction.args()[1]);
 
-                operation = new MoveOperation(program, a, b);
+                operation = new MoveOperation(program, instruction.line(), a, b);
             }
 
             case ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO, LEFT_SHIFT, RIGHT_SHIFT, BITWISE_AND, BITWISE_OR, BITWISE_XOR -> {
@@ -101,99 +101,99 @@ public class Parser {
                 Function<Program, Integer> b = getValueFromString(bStr);
 
                 switch (instruction.token()){
-                    case ADD -> operation = new AddOperation(program, a, b);
-                    case SUBTRACT -> operation = new SubtractOperation(program, a, b);
-                    case MULTIPLY -> operation = new MultiplyOperation(program, a, b);
-                    case DIVIDE -> operation = new DivideOperation(program, a, b);
-                    case MODULO -> operation = new ModuloOperation(program, a, b);
-                    case LEFT_SHIFT -> operation = new LeftShiftOperation(program, a, b);
-                    case RIGHT_SHIFT -> operation = new RightShiftOperation(program, a, b);
-                    case BITWISE_AND -> operation = new AndOperation(program, a, b);
-                    case BITWISE_OR -> operation = new OrOperation(program, a, b);
-                    case BITWISE_XOR -> operation = new XorOperation(program, a, b);
+                    case ADD -> operation = new AddOperation(program, instruction.line(), a, b);
+                    case SUBTRACT -> operation = new SubtractOperation(program, instruction.line(), a, b);
+                    case MULTIPLY -> operation = new MultiplyOperation(program, instruction.line(), a, b);
+                    case DIVIDE -> operation = new DivideOperation(program, instruction.line(), a, b);
+                    case MODULO -> operation = new ModuloOperation(program, instruction.line(), a, b);
+                    case LEFT_SHIFT -> operation = new LeftShiftOperation(program, instruction.line(), a, b);
+                    case RIGHT_SHIFT -> operation = new RightShiftOperation(program, instruction.line(), a, b);
+                    case BITWISE_AND -> operation = new AndOperation(program, instruction.line(), a, b);
+                    case BITWISE_OR -> operation = new OrOperation(program, instruction.line(), a, b);
+                    case BITWISE_XOR -> operation = new XorOperation(program, instruction.line(), a, b);
                 }
             }
 
             case BITWISE_NOT -> {
                 Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
-                operation = new NotOperation(program, a);
+                operation = new NotOperation(program, instruction.line(), a);
             }
 
             case PRINT -> {
                 Function<Program, Register<Integer>> register = getRegisterFromString(instruction.args()[0]);
-                operation = new PrintOperation(program, register);
+                operation = new PrintOperation(program, instruction.line(), register);
             }
 
             case ASCII_PRINT -> {
                 Function<Program, Integer> charr = getValueFromString(instruction.args()[0]);
-                operation = new AsciiPrintOperation(program, charr);
+                operation = new AsciiPrintOperation(program, instruction.line(), charr);
             }
 
-            case PRINT_STACK -> operation = new PrintStackOperation(program);
+            case PRINT_STACK -> operation = new PrintStackOperation(program, instruction.line());
 
             case IF -> {
                 Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
                 Token compareOperation = Token.getTokenByIdentifier(instruction.args()[1]);
                 Function<Program, Integer> b = getValueFromString(instruction.args()[2]);
 
-                operation = new IfOperation(program, a, b, compareOperation);
+                operation = new IfOperation(program, instruction.line(), a, b, compareOperation);
             }
 
-            case ELSE -> operation = new ElseOperation(program);
+            case ELSE -> operation = new ElseOperation(program, instruction.line());
 
             case WHILE -> {
                 Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
                 Token compareOperation = Token.getTokenByIdentifier(instruction.args()[1]);
                 Function<Program, Integer> b = getValueFromString(instruction.args()[2]);
 
-                operation = new WhileOperation(program, a, b, compareOperation);
+                operation = new WhileOperation(program, instruction.line(), a, b, compareOperation);
             }
 
             case FUNCTION -> {
                 String name = instruction.args()[0];
 
-                operation = new FunctionOperation(program, name);
+                operation = new FunctionOperation(program, instruction.line(), name);
             }
 
             case CALL -> {
                 String name = instruction.args()[0];
 
-                operation = new CallOperation(program, name);
+                operation = new CallOperation(program, instruction.line(), name);
             }
 
-            case END -> operation = new EndOperation(program);
+            case END -> operation = new EndOperation(program, instruction.line());
 
             case MEM_SET -> {
                 Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
                 Function<Program, Byte> value = getByteFromString(instruction.args()[1]);
 
-                operation = new MemorySetOperation(program, index, value);
+                operation = new MemorySetOperation(program, instruction.line(), index, value);
             }
 
             case MEM_GET -> {
                 Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
 
-                operation = new MemoryGetOperation(program, index);
+                operation = new MemoryGetOperation(program, instruction.line(), index);
             }
 
             case MEM_ALLOC -> {
                 Function<Program, Integer> size = getValueFromString(instruction.args()[0]);
-                operation = new MemoryAllocOperation(program, size);
+                operation = new MemoryAllocOperation(program, instruction.line(), size);
             }
 
             case MEM_FREE -> {
                 Function<Program, Integer> ptr = getValueFromString(instruction.args()[0]);
-                operation = new MemoryFreeOperation(program, ptr);
+                operation = new MemoryFreeOperation(program, instruction.line(), ptr);
             }
 
-            case MEM_DUMP -> operation = new MemoryDumpOperation(program);
+            case MEM_DUMP -> operation = new MemoryDumpOperation(program, instruction.line());
 
             case SYSCALL -> {
                 Function<Program, Integer> id = getValueFromString(instruction.args()[0]);
-                operation = new SyscallOperation(program, id);
+                operation = new SyscallOperation(program, instruction.line(), id);
             }
 
-            case STRING -> operation = new StringOperation(program, instruction.args());
+            case STRING -> operation = new StringOperation(program, instruction.line(), instruction.args());
 
             default -> throw new NoSuchElementException("Could not find operation token");
         }

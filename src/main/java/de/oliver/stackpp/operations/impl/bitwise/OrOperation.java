@@ -11,8 +11,8 @@ public class OrOperation extends Operation {
     private final Function<Program, Register<Integer>> a;
     private final Function<Program, Integer> b;
 
-    public OrOperation(Program program, Function<Program, Register<Integer>> a, Function<Program, Integer> b) {
-        super(program);
+    public OrOperation(Program program, int line, Function<Program, Register<Integer>> a, Function<Program, Integer> b) {
+        super(program, line);
         this.a = a;
         this.b = b;
     }

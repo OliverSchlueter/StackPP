@@ -5,8 +5,8 @@ import de.oliver.stackpp.Program;
 
 public class EndOperation extends Operation {
 
-    public EndOperation(Program program) {
-        super(program);
+    public EndOperation(Program program, int line) {
+        super(program, line);
     }
 
     @Override

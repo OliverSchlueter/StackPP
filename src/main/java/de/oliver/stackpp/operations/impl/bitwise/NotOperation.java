@@ -10,8 +10,8 @@ public class NotOperation extends Operation {
 
     private final Function<Program, Register<Integer>> a;
 
-    public NotOperation(Program program, Function<Program, Register<Integer>> a) {
-        super(program);
+    public NotOperation(Program program, int line, Function<Program, Register<Integer>> a) {
+        super(program, line);
         this.a = a;
     }
 

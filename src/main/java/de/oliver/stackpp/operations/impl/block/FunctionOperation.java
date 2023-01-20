@@ -11,8 +11,8 @@ public class FunctionOperation extends BlockOperation implements CompileOperatio
 
     private final String name;
 
-    public FunctionOperation(Program program, String name) {
-        super(program, new LinkedList<>());
+    public FunctionOperation(Program program, int line, String name) {
+        super(program, line, new LinkedList<>());
         this.name = name;
     }
 

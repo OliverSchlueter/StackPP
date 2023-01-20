@@ -7,8 +7,8 @@ public class CallOperation extends Operation {
 
     private final String functionName;
 
-    public CallOperation(Program program, String functionName) {
-        super(program);
+    public CallOperation(Program program, int line, String functionName) {
+        super(program, line);
         this.functionName = functionName;
     }
 

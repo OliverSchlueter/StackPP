@@ -17,8 +17,8 @@ public class IfOperation extends BlockOperation {
     private final Queue<Operation> elseOperations;
     private boolean isInElse;
 
-    public IfOperation(Program program, Function<Program, Integer> a, Function<Program, Integer> b, Token compareOperation) {
-        super(program, new LinkedList<>());
+    public IfOperation(Program program, int line, Function<Program, Integer> a, Function<Program, Integer> b, Token compareOperation) {
+        super(program, line, new LinkedList<>());
         this.a = a;
         this.b = b;
         this.compareOperation = compareOperation;

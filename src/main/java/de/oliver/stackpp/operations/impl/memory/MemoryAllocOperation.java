@@ -9,8 +9,8 @@ public class MemoryAllocOperation extends Operation {
 
     private final Function<Program, Integer> size;
 
-    public MemoryAllocOperation(Program program, Function<Program, Integer> size) {
-        super(program);
+    public MemoryAllocOperation(Program program, int line, Function<Program, Integer> size) {
+        super(program, line);
         this.size = size;
     }
 

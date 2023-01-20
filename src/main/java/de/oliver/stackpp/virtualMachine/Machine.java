@@ -17,14 +17,16 @@ import java.util.*;
 public class Machine {
 
     private final Stack<Integer> stack;
-    private final Map<String, Register<Integer>> registers;
+    private final Map<String, Register<Integer>> intergerRegisters;
+    private final Map<String, Register<Float>> floatRegisters;
     private final Map<Integer, Syscall> syscalls;
     private final Memory memory;
     private final Map<String, File> openedFiles; // path -> file
 
     public Machine() {
         this.stack = new Stack<>();
-        this.registers = new HashMap<>();
+        this.intergerRegisters = new HashMap<>();
+        this.floatRegisters = new HashMap<>();
         this.syscalls = new HashMap<>();
         this.memory = new Memory(1024);
         this.openedFiles = new HashMap<>();
@@ -33,27 +35,27 @@ public class Machine {
 
     private void init(){
         // registers for calculating
-        registers.put("a", new Register<>("a", 0));
-        registers.put("b", new Register<>("b", 0));
-        registers.put("c", new Register<>("c", 0));
-        registers.put("d", new Register<>("d", 0));
-        registers.put("e", new Register<>("e", 0));
-        registers.put("f", new Register<>("f", 0));
+        intergerRegisters.put("a", new Register<>("a", 0));
+        intergerRegisters.put("b", new Register<>("b", 0));
+        intergerRegisters.put("c", new Register<>("c", 0));
+        intergerRegisters.put("d", new Register<>("d", 0));
+        intergerRegisters.put("e", new Register<>("e", 0));
+        intergerRegisters.put("f", new Register<>("f", 0));
 
         // registers as indexes
-        registers.put("i", new Register<>("i", 0));
-        registers.put("j", new Register<>("j", 0));
-        registers.put("k", new Register<>("k", 0));
+        intergerRegisters.put("i", new Register<>("i", 0));
+        intergerRegisters.put("j", new Register<>("j", 0));
+        intergerRegisters.put("k", new Register<>("k", 0));
 
         // registers for function inputs
-        registers.put("f1", new Register<>("f1", 0));
-        registers.put("f2", new Register<>("f2", 0));
-        registers.put("f3", new Register<>("f3", 0));
-        registers.put("f4", new Register<>("f4", 0));
-        registers.put("f5", new Register<>("f5", 0));
-        registers.put("f6", new Register<>("f6", 0));
-        registers.put("f7", new Register<>("f7", 0));
-        registers.put("f8", new Register<>("f8", 0));
+        intergerRegisters.put("f1", new Register<>("f1", 0));
+        intergerRegisters.put("f2", new Register<>("f2", 0));
+        intergerRegisters.put("f3", new Register<>("f3", 0));
+        intergerRegisters.put("f4", new Register<>("f4", 0));
+        intergerRegisters.put("f5", new Register<>("f5", 0));
+        intergerRegisters.put("f6", new Register<>("f6", 0));
+        intergerRegisters.put("f7", new Register<>("f7", 0));
+        intergerRegisters.put("f8", new Register<>("f8", 0));
 
         // syscalls
         syscalls.put(1, new ExitSyscall(1, this));
@@ -82,23 +84,36 @@ public class Machine {
     }
 
     public void resetRegisters(){
-        registers.clear();
+        intergerRegisters.clear();
+        floatRegisters.clear();
     }
 
     public Stack<Integer> getStack() {
         return stack;
     }
 
-    public Map<String, Register<Integer>> getRegisters() {
-        return registers;
+    public Map<String, Register<Integer>> getIntergerRegisters() {
+        return intergerRegisters;
     }
 
-    public Register<Integer> getRegister(String name){
-        if(registers.containsKey(name)){
-            return registers.get(name);
-        }
+    public Map<String, Register<Float>> getFloatRegisters() {
+        return floatRegisters;
+    }
 
-        return null;
+    /**
+     * @deprecated use getIntegerRegister and getFloatRegister instead
+     */
+    @Deprecated
+    public Register<Integer> getRegister(String name){
+        return getIntegerRegister(name);
+    }
+
+    public Register<Integer> getIntegerRegister(String name){
+        return intergerRegisters.getOrDefault(name, null);
+    }
+
+    public Register<Float> getFloatRegister(String name){
+        return floatRegisters.getOrDefault(name, null);
     }
 
     public Map<Integer, Syscall> getSyscalls() {

@@ -10,8 +10,8 @@ public class PrintOperation extends Operation {
 
     private final Function<Program, Register<Integer>> register;
 
-    public PrintOperation(Program program, Function<Program, Register<Integer>> register) {
-        super(program);
+    public PrintOperation(Program program, int line, Function<Program, Register<Integer>> register) {
+        super(program, line);
         this.register = register;
     }
 

@@ -6,8 +6,8 @@ import de.oliver.stackpp.Program;
 public class ElseOperation extends Operation {
 
 
-    public ElseOperation(Program program) {
-        super(program);
+    public ElseOperation(Program program, int line) {
+        super(program, line);
     }
 
     @Override

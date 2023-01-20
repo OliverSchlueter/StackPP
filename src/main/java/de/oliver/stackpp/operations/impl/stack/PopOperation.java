@@ -10,8 +10,8 @@ public class PopOperation extends Operation {
 
     private final Function<Program, Register<Integer>> register;
 
-    public PopOperation(Program program, Function<Program, Register<Integer>> register) {
-        super(program);
+    public PopOperation(Program program, int line, Function<Program, Register<Integer>> register) {
+        super(program, line);
         this.register = register;
     }
 

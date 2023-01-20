@@ -8,8 +8,8 @@ public abstract class BlockOperation extends Operation {
 
     protected final Queue<Operation> operations;
 
-    public BlockOperation(Program program, Queue<Operation> operations) {
-        super(program);
+    public BlockOperation(Program program, int line, Queue<Operation> operations) {
+        super(program, line);
         this.operations = operations;
     }
 

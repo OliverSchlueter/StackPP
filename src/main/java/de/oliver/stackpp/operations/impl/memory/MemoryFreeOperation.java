@@ -9,8 +9,8 @@ public class MemoryFreeOperation extends Operation {
 
     private final Function<Program, Integer> ptr;
 
-    public MemoryFreeOperation(Program program, Function<Program, Integer> ptr) {
-        super(program);
+    public MemoryFreeOperation(Program program, int line, Function<Program, Integer> ptr) {
+        super(program, line);
         this.ptr = ptr;
     }
 

@@ -11,8 +11,8 @@ public class LeftShiftOperation extends Operation {
     private final Function<Program, Register<Integer>> a;
     private final Function<Program, Integer> amount;
 
-    public LeftShiftOperation(Program program, Function<Program, Register<Integer>> a, Function<Program, Integer> amount) {
-        super(program);
+    public LeftShiftOperation(Program program, int line, Function<Program, Register<Integer>> a, Function<Program, Integer> amount) {
+        super(program, line);
         this.a = a;
         this.amount = amount;
     }

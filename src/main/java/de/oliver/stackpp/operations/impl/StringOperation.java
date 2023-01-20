@@ -7,8 +7,8 @@ public class StringOperation extends Operation {
 
     private final String[] str;
 
-    public StringOperation(Program program, String[] str) {
-        super(program);
+    public StringOperation(Program program, int line, String[] str) {
+        super(program, line);
         this.str = str;
     }
 

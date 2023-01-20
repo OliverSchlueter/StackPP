@@ -9,8 +9,8 @@ public class PushOperation extends Operation {
 
     private final Function<Program, Integer> value;
 
-    public PushOperation(Program program, Function<Program, Integer> value) {
-        super(program);
+    public PushOperation(Program program, int line, Function<Program, Integer> value) {
+        super(program, line);
         this.value = value;
     }
 

@@ -9,8 +9,8 @@ public class MemoryGetOperation extends Operation {
 
     private final Function<Program, Integer> index;
 
-    public MemoryGetOperation(Program program, Function<Program, Integer> index) {
-        super(program);
+    public MemoryGetOperation(Program program, int line, Function<Program, Integer> index) {
+        super(program, line);
         this.index = index;
     }
 

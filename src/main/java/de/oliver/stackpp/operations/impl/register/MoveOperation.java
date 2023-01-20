@@ -11,8 +11,8 @@ public class MoveOperation extends Operation {
     private final Function<Program, Integer> value;
     private final Function<Program, Register<Integer>> register;
 
-    public MoveOperation(Program program, Function<Program, Integer> value, Function<Program, Register<Integer>> register) {
-        super(program);
+    public MoveOperation(Program program, int line, Function<Program, Integer> value, Function<Program, Register<Integer>> register) {
+        super(program, line);
         this.value = value;
         this.register = register;
     }

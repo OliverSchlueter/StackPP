@@ -10,8 +10,8 @@ public class SyscallOperation extends Operation {
 
     private final Function<Program, Integer> id;
 
-    public SyscallOperation(Program program, Function<Program, Integer> id) {
-        super(program);
+    public SyscallOperation(Program program, int line, Function<Program, Integer> id) {
+        super(program, line);
         this.id = id;
     }
 

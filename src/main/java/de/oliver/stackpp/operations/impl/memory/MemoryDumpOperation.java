@@ -5,8 +5,8 @@ import de.oliver.stackpp.Program;
 
 public class MemoryDumpOperation extends Operation {
 
-    public MemoryDumpOperation(Program program) {
-        super(program);
+    public MemoryDumpOperation(Program program, int line) {
+        super(program, line);
     }
 
     @Override

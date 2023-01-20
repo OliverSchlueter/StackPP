@@ -5,8 +5,8 @@ import de.oliver.stackpp.Program;
 
 public class PrintStackOperation extends Operation {
 
-    public PrintStackOperation(Program program) {
-        super(program);
+    public PrintStackOperation(Program program, int line) {
+        super(program, line);
     }
 
     @Override

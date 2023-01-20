@@ -14,8 +14,8 @@ public class WhileOperation extends BlockOperation {
     private final Function<Program, Integer> b;
     private final Token compareOperation;
 
-    public WhileOperation(Program program, Function<Program, Integer> a, Function<Program, Integer> b, Token compareOperation) {
-        super(program, new LinkedList<>());
+    public WhileOperation(Program program, int line, Function<Program, Integer> a, Function<Program, Integer> b, Token compareOperation) {
+        super(program, line, new LinkedList<>());
         this.a = a;
         this.b = b;
         this.compareOperation = compareOperation;

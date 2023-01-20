@@ -9,8 +9,8 @@ public class AsciiPrintOperation extends Operation {
 
     private final Function<Program, Integer> charr;
 
-    public AsciiPrintOperation(Program program, Function<Program, Integer> charr) {
-        super(program);
+    public AsciiPrintOperation(Program program, int line, Function<Program, Integer> charr) {
+        super(program, line);
         this.charr = charr;
     }
 
