@@ -56,3 +56,27 @@ function scalar_product
 
     push f4     ; return scalar product
 end
+
+
+; EXPERIMENTAL!
+; f1 - ptr to vec
+; f2 - number of components
+function vector_length
+
+    move 0 f3
+
+    while f2 > 0
+        memget f1
+        pop f4
+
+        multiply f4 f4  ; component * component
+        add f3 f4
+
+        add f1 1        ; ptr++
+        subtract f2 1   ; size--
+    end
+
+    move f3 f1
+    print f3
+    call sqrt
+end
