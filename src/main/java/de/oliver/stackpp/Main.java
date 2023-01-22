@@ -18,7 +18,7 @@ public class Main {
         } else {
             content = String.join("\r\n",
                     "",
-                    "#INCLUDE vec.spp",
+                    "#INCLUDE math.spp",
                     ""
                     );
         }

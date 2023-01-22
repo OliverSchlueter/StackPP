@@ -17,3 +17,32 @@ function sqrt
 
     push f5
 end
+
+; f1 - first number
+; f2 - second number
+function max
+    if f1 > f2
+        push f1
+    else
+        push f2
+    end
+end
+
+; f1 - first number
+; f2 - second number
+function min
+    if f1 < f2
+        push f1
+    else
+        push f2
+    end
+end
+
+; f1 - input number
+function abs
+    if f1 < 0
+        multiply f1 -1
+    end
+
+    push f1
+end
