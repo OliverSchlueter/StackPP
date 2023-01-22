@@ -35,6 +35,7 @@ public enum Token {
     THROW("throw"),
 
     EQUAL_SIGN("="),
+    EXCLAMATION_MARK_SIGN("!"),
     GREATER_SIGN(">"),
     LOWER_SIGN("<"),
     ;

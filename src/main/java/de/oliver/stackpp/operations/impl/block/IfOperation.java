@@ -85,6 +85,10 @@ public class IfOperation extends BlockOperation {
                 if(aVal == bVal) conditionTrue = true;
             }
 
+            case EXCLAMATION_MARK_SIGN -> {
+                if(aVal != bVal) conditionTrue = true;
+            }
+
             case GREATER_SIGN -> {
                 if(aVal > bVal) conditionTrue = true;
             }

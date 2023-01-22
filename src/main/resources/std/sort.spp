@@ -40,7 +40,3 @@ function bubble_sort
         add f4 1
     end
 end
-
-syscall 10
-pop a
-print a
