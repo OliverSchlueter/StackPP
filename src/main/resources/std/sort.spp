@@ -1,0 +1,42 @@
+; f1 - ptr to memory-chunk
+; f2 - size of memory-chunk
+function bubble_sort
+    ; set last index in f3
+    move f1 f3
+    add f3 f2
+
+    move f1 f4      ; copy of ptr for outer loop
+    move f1 f5      ; copy of ptr for inner loop
+
+    while f4 < f3
+        while f5 < f3
+            if f5 = f1      ; first element
+                ; nothing
+            else
+                memget f5       ; current element
+
+                ; get previous element
+                subtract f5 1
+                memget f5
+                add f5 1
+
+                pop f6  ; previous
+                pop f7  ; current
+
+                if f7 < f6
+                    ; swap elements
+                    memset f5 f6
+
+                    subtract f5 1
+                    memset f5 f7
+                    add f5 1
+                end
+            end
+
+            add f5 1
+        end
+
+        move f1 f5
+        add f4 1
+    end
+end

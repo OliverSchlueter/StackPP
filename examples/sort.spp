@@ -1,0 +1,32 @@
+#INCLUDE sort.spp
+
+; allocate 5 bytes
+malloc 5
+pop a
+push a
+
+; set values [7, 1, 9, 5, 2]
+memset a 7
+add a 1
+
+memset a 1
+add a 1
+
+memset a 9
+add a 1
+
+memset a 5
+add a 1
+
+memset a 2
+add a 1
+
+
+; sort
+pop a
+push a
+move a f1
+move 5 f2
+call bubble_sort
+
+memdump
