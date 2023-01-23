@@ -58,3 +58,19 @@ function pow
 
     push f1
 end
+
+; f1 - input number
+function factorial
+    move 1 f2   ; result
+    move 2 f3   ; index
+
+    add f1 1    ; to get the same effect as 'f3 <= f1'
+
+    while f3 < f1
+        multiply f2 f3
+
+        add f3 1
+    end
+
+    push f2
+end
