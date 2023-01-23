@@ -46,3 +46,15 @@ function abs
 
     push f1
 end
+
+; f1 - input number
+; f2 - exponent
+function pow
+    move f1 f3
+    while f2 > 0
+        multiply f1 f3
+        subtract f2 1
+    end
+
+    push f1
+end
