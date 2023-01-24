@@ -51,3 +51,26 @@ function write_file
     move 0 d    ; offset
     syscall 5   ; write file syscall
 end
+
+; f1 - destination ptr
+; f2 - source ptr
+; f3 - size
+function memmove
+    push f1
+
+    while f3 > 0
+        ; get value at source
+        memget f2
+        pop f4
+
+        ; set value at destination
+        memset f1 f4
+
+        ; update pointers and index
+        add f1 1
+        add f2 1
+        subtract f3 1
+    end
+
+    pop f1
+end
