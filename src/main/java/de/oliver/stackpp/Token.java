@@ -24,6 +24,7 @@ public enum Token {
     WHILE("while"),
     FUNCTION("function"),
     CALL("call"),
+    BREAK("break"),
     END("end"),
     MEM_GET("memget"),
     MEM_SET("memset"),

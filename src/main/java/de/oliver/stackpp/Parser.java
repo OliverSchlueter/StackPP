@@ -164,6 +164,17 @@ public class Parser {
 
             case END -> operation = new EndOperation(program, instruction.line());
 
+            case BREAK -> {
+                Function<Program, WhileOperation> whileBlock = null;
+                for (BlockOperation blockOperation : waitForEnd) {
+                    if(blockOperation instanceof WhileOperation wOp){
+                        whileBlock = p -> wOp;
+                    }
+                }
+
+                operation = new BreakOperation(program, instruction.line(), whileBlock);
+            }
+
             case MEM_SET -> {
                 Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
                 Function<Program, Byte> value = getByteFromString(instruction.args()[1]);

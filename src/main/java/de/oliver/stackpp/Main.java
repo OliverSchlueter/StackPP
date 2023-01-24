@@ -18,7 +18,7 @@ public class Main {
         } else {
             content = String.join("\r\n",
                     "",
-                    "#INCLUDE sort.spp",
+                    "#INCLUDE vars.spp",
                     ""
                     );
         }
