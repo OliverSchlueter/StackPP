@@ -1,0 +1,37 @@
+; create variable name
+str testVar1
+pop a
+pop a
+move a f1   ; use as first argument
+
+; create value
+malloc 1
+pop f2      ; for the second argument
+memset f2 7
+
+; create variable
+call var_create
+
+; do the same again
+str testVar2
+pop a
+pop a
+push a      ; push the ptr on stack so we can test var_get later
+move a f1
+malloc 1
+pop f2
+memset f2 69
+call var_create
+
+; get value ptr
+pop f1
+call var_get
+
+; check the value
+pop a
+memget a
+pop a
+print a
+
+; see how it looks in memory
+memdump
