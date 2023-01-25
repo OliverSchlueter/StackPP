@@ -35,7 +35,11 @@ public class WhileOperation extends BlockOperation {
                 if(program.isExit()) return;
                 if(operation instanceof BreakOperation) {
                     return;
+                } else if(operation instanceof ContinueOperation){
+                    System.out.println("CONTINUE");
+                    break;
                 }
+
                 operation.execute();
             }
         }

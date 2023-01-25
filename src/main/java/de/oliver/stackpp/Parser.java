@@ -175,6 +175,8 @@ public class Parser {
                 operation = new BreakOperation(program, instruction.line(), whileBlock);
             }
 
+            case CONTINUE -> operation = new ContinueOperation(program, instruction.line());
+
             case MEM_SET -> {
                 Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
                 Function<Program, Byte> value = getByteFromString(instruction.args()[1]);
