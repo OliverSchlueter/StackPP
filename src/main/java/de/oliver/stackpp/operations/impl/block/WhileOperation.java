@@ -29,6 +29,7 @@ public class WhileOperation extends BlockOperation {
 
     @Override
     public void execute() {
+        close = false;
         while (IfOperation.compare(program, a, b, compareOperation) && !close) {
             for (Operation operation : operations) {
                 if(program.isExit()) return;
