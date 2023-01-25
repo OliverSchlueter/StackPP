@@ -14,6 +14,7 @@ public class WhileOperation extends BlockOperation {
     private final Function<Program, Integer> b;
     private final Token compareOperation;
     private boolean close;
+    private boolean next;
 
     public WhileOperation(Program program, int line, Function<Program, Integer> a, Function<Program, Integer> b, Token compareOperation) {
         super(program, line, new LinkedList<>());
@@ -30,13 +31,14 @@ public class WhileOperation extends BlockOperation {
     @Override
     public void execute() {
         close = false;
+        next = false;
         while (IfOperation.compare(program, a, b, compareOperation) && !close) {
             for (Operation operation : operations) {
                 if(program.isExit()) return;
                 if(operation instanceof BreakOperation) {
                     return;
-                } else if(operation instanceof ContinueOperation){
-                    System.out.println("CONTINUE");
+                } else if(next || operation instanceof ContinueOperation){
+                    next = false;
                     break;
                 }
 
@@ -63,5 +65,13 @@ public class WhileOperation extends BlockOperation {
 
     public void setClose(boolean close) {
         this.close = close;
+    }
+
+    public boolean isNext() {
+        return next;
+    }
+
+    public void setNext(boolean next) {
+        this.next = next;
     }
 }
