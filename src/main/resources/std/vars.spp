@@ -18,52 +18,75 @@ pop a
 ; f2 - ptr value
 function var_create
     move 0 f3
-    push f1
     push f2
+    push f1
+
     while f3 < 800
         ; check if this chunk is taken
+        ; check if all bytes of the name ptr are 0x00
+        move 0 f4
+
         memget f3
-        pop f4
+        pop f5
+        or f4 f5
+
+        add f3 1
+        memget f3
+        pop f5
+        or f4 f5
+
+        add f3 1
+        memget f3
+        pop f5
+        or f4 f5
+
+        add f3 1
+        memget f3
+        pop f5
+        or f4 f5
+
+        subtract f3 3   ; go back to start of ptr
+
         if f4 = 0
             ; set ptr name
             pop f1
             call int2bytes
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             ; set ptr value
             pop f1
             call int2bytes
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             pop f1
-            memset f4 f1
-            add f4 1
+            memset f3 f1
+            add f3 1
 
             break
         end
@@ -74,32 +97,70 @@ end
 
 ; f1 - ptr name
 function var_get
+    move 0 f3
+
     while f3 < 800
+        ; check if pointer is the same
+        call int2bytes  ; get bytes
+
         memget f3
-        pop f4
-        if f4 = f1
-            add f4 1    ; go to the value ptr
-            push f4     ; return the ptr to the value
-            break
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 7
+            continue    ; the byte was not correct, try next chunk
         end
 
-        add f3 2
-    end
-end
-
-; f1 - ptr name
-; f2 - ptr value
-function var_set
-    while f3 < 800
         memget f3
-        pop f4
-        if f4 = f1
-            add f4 1        ; go to the value ptr
-            memset f4 f2    ; set new ptr
-            break
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 6
+            continue    ; the byte was not correct, try next chunk
         end
 
-        add f3 2
+        memget f3
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 5
+            continue    ; the byte was not correct, try next chunk
+        end
+
+        memget f3
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 5
+            continue    ; the byte was not correct, try next chunk
+        end
+
+        ; found matching pointer
+
+        add f3 3
+
+        memget f3
+        subtract f3 1
+
+        memget f3
+        subtract f3 1
+
+        memget f3
+        subtract f3 1
+
+        memget f3
+        subtract f3 1
+
+        call bytes2int
+        break
     end
 end
 
@@ -165,22 +226,3 @@ function bytes2int
 end
 
 
-str testVar1
-pop a
-pop a
-move a f1
-malloc 1
-pop f2
-memset f2 7
-call var_create
-
-str testVar2
-pop a
-pop a
-move a f1
-malloc 1
-pop f2
-memset f2 3
-call var_create
-
-memdump
