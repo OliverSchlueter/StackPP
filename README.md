@@ -45,7 +45,7 @@ You can find a bunch of examples in the ``examples/`` directory.
     - [ ] set title
     - [ ] set width and height
     - [ ] set background color
-    - [ ] draw rectangle with color
+    - [x] draw rectangle with color
   - [ ] draw texture
   - [ ] draw text
 - [ ] Internet (not sure yet)
