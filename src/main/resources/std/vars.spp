@@ -1,0 +1,226 @@
+; -------------------------------------------------------------------------------
+; If you want to use this library, ALWAYS include this file before anything else!
+; -------------------------------------------------------------------------------
+
+
+; Structure
+; every ptr is 4 bytes long
+; -----------------------------------------------
+; | ptr name | ptr value | ptr name | ptr value |
+; -----------------------------------------------
+
+#DEFINE VARS_SIZE 800
+
+malloc VARS_SIZE   ; allocate enough space for 100 variables
+pop a
+
+; f1 - ptr name
+; f2 - ptr value
+function var_create
+    move 0 f3
+    push f2
+    push f1
+
+    while f3 < VARS_SIZE
+        ; check if this chunk is taken
+        ; check if all bytes of the name ptr are 0x00
+        move 0 f4
+
+        memget f3
+        pop f5
+        or f4 f5
+
+        add f3 1
+        memget f3
+        pop f5
+        or f4 f5
+
+        add f3 1
+        memget f3
+        pop f5
+        or f4 f5
+
+        add f3 1
+        memget f3
+        pop f5
+        or f4 f5
+
+        subtract f3 3   ; go back to start of ptr
+
+        if f4 = 0
+            ; set ptr name
+            pop f1
+            call int2bytes
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            ; set ptr value
+            pop f1
+            call int2bytes
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            pop f1
+            memset f3 f1
+            add f3 1
+
+            break
+        end
+
+        add f3 8
+    end
+end
+
+; f1 - ptr name
+function var_get
+    move 0 f3
+
+    while f3 < VARS_SIZE
+        ; check if pointer is the same
+        call int2bytes  ; get bytes
+
+        memget f3
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 7
+            continue    ; the byte was not correct, try next chunk
+        end
+
+        memget f3
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 6
+            continue    ; the byte was not correct, try next chunk
+        end
+
+        memget f3
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 5
+            continue    ; the byte was not correct, try next chunk
+        end
+
+        memget f3
+        pop f4      ; byte in memory
+        pop f5      ; byte of provided ptr
+        if f4 = f5
+            add f3 1    ; go to next byte
+        else
+            add f3 5
+            continue    ; the byte was not correct, try next chunk
+        end
+
+        ; found matching pointer
+
+        add f3 3
+
+        memget f3
+        subtract f3 1
+
+        memget f3
+        subtract f3 1
+
+        memget f3
+        subtract f3 1
+
+        memget f3
+        subtract f3 1
+
+        call bytes2int
+        break
+    end
+end
+
+; f1 - input int
+function int2bytes
+    ; bytes[0] = (num >> 24) & 0xFF;
+    ; bytes[1] = (num >> 16) & 0xFF;
+    ; bytes[2] = (num >> 8) & 0xFF;
+    ; bytes[3] = num & 0xFF;
+
+    ; (num >> 0) & 0xFF
+    move f1 f2
+    rshift f2 0
+    and f2 255
+    push f2
+
+    ; (num >> 8) & 0xFF
+    move f1 f2
+    rshift f2 8
+    and f2 255
+    push f2
+
+    ; (num >> 16) & 0xFF
+    move f1 f2
+    rshift f2 16
+    and f2 255
+    push f2
+
+    ; (num >> 24) & 0xFF
+    move f1 f2
+    rshift f2 24
+    and f2 255
+    push f2
+end
+
+; 4 bytes on stack
+function bytes2int
+    ; int32 num = (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3]
+
+    move 0 f1   ; result
+
+    ; num | (bytes[0] << 24)
+    pop f2
+    lshift f2 24
+    or f1 f2
+
+    ; num | (bytes[0] << 16)
+    pop f2
+    lshift f2 16
+    or f1 f2
+
+    ; num | (bytes[0] << 8)
+    pop f2
+    lshift f2 8
+    or f1 f2
+
+    ; num | (bytes[0] << 0)
+    pop f2
+    lshift f2 0
+    or f1 f2
+
+    push f1
+end

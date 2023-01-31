@@ -29,7 +29,7 @@ public class Machine {
         this.intergerRegisters = new HashMap<>();
         this.floatRegisters = new HashMap<>();
         this.syscalls = new HashMap<>();
-        this.memory = new Memory(1024);
+        this.memory = new Memory(640_000); // should be enough for everyone
         this.openedFiles = new HashMap<>();
         init();
     }

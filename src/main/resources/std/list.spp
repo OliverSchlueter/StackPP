@@ -1,0 +1,21 @@
+; f1 - initial size
+; f2 - size per element
+function list_create
+
+end
+
+; f1 - index
+function list_get
+
+end
+
+; f1 - index
+; f2 - ptr to value
+function list_append
+
+end
+
+; f1 - index
+function list_remove
+
+end
