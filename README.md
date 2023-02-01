@@ -1,3 +1,6 @@
+[![Generic badge](https://img.shields.io/badge/version-1.1.2-orange.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/status-active_development-darkred.svg)](https://shields.io/)
+
 # Stack++
 
 Smart stack + some registers = Stack++.
@@ -15,7 +18,7 @@ _Still in active development!_
 ````console
 $ git clone https://github.com/OliverSchlueter/StackPP.git
 $ cd StackPP/
-$ gradlew jar
+$ gradlew shadowJar
 ````
 
 ### Run jar
@@ -27,9 +30,15 @@ $ java -jar StackPP.jar [path to .spp file]
 
 ## Documentation
 
-You can find the documentation for the Stack++ language in ``StackPP.md``.
+You can find the documentation for the Stack++ language in [StackPP.md](StackPP.md).
 
-You can find a bunch of examples in the ``examples/`` directory.
+You can find a bunch of examples in the [examples/](examples) directory.
+
+## IntelliJ plugin
+
+I made a IntelliJ plugin, that adds syntax highlighting and auto-completion for Stack++.
+
+You can find it here: [StackPP-Plugin](https://github.com/OliverSchlueter/StackPP-Plugin)
 
 ## Roadmap
 
