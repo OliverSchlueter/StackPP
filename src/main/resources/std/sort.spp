@@ -10,9 +10,7 @@ function bubble_sort
 
     while f4 < f3
         while f5 < f3
-            if f5 = f1      ; first element
-                ; nothing
-            else
+            if f5 ! f1      ; first element
                 memget f5       ; current element
 
                 ; get previous element
