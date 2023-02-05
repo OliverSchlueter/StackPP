@@ -37,6 +37,7 @@ public enum Token {
     SYSCALL("syscall"),
     STRING("str"),
     THROW("throw"),
+    NO_OPERATION("nop"),
 
     EQUAL_SIGN("="),
     EXCLAMATION_MARK_SIGN("!"),

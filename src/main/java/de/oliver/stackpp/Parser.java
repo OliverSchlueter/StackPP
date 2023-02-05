@@ -3,6 +3,7 @@ package de.oliver.stackpp;
 import de.oliver.stackpp.operations.BlockOperation;
 import de.oliver.stackpp.operations.CompileOperation;
 import de.oliver.stackpp.operations.Operation;
+import de.oliver.stackpp.operations.impl.NoOperationOperation;
 import de.oliver.stackpp.operations.impl.StringOperation;
 import de.oliver.stackpp.operations.impl.SyscallOperation;
 import de.oliver.stackpp.operations.impl.ThrowOperation;
@@ -232,6 +233,8 @@ public class Parser {
                 Function<Program, Integer> msgPtr = getValueFromString(instruction.args()[0]);
                 operation = new ThrowOperation(program, instruction.line(), msgPtr);
             }
+
+            case NO_OPERATION -> operation = new NoOperationOperation(program, instruction.line());
 
             default -> throw new NoSuchElementException("Could not find operation token");
         }
