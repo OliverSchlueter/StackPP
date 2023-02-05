@@ -10,6 +10,8 @@ public enum Token {
     MULTIPLY("multiply"),
     DIVIDE("divide"),
     MODULO("modulo"),
+    INCREMENT("inc"),
+    DECREMENT("dec"),
     LEFT_SHIFT("lshift"),
     RIGHT_SHIFT("rshift"),
     BITWISE_AND("and"),

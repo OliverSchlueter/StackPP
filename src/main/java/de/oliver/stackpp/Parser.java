@@ -115,6 +115,16 @@ public class Parser {
                 }
             }
 
+            case INCREMENT -> {
+                Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
+                operation = new IncrementOperation(program, instruction.line(), a);
+            }
+
+            case DECREMENT -> {
+                Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
+                operation = new DecrementOperation(program, instruction.line(), a);
+            }
+
             case BITWISE_NOT -> {
                 Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
                 operation = new NotOperation(program, instruction.line(), a);
