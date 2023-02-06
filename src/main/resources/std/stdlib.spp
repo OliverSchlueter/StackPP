@@ -13,16 +13,19 @@ end
 ; f1 - the pointer to the start of the buffer
 function print
     move 1 i
+    move f1 f2
 
     while i = 1
-        memget c    ; read char
+        memget f2   ; read char
         pop b       ; put char in 'b'
 
-        if b = ASCII_NULL   ; check if char is NULL
+        if b = ASCII_NUL    ; check if char is NULL
             move 0 i        ; exit loop
+            break
+        else
+           inc f2   ; increase ptr
+           inc c    ; increase counter
         end
-
-        add c 1     ; increase counter
     end
 
     move 1 a    ; use standard output
