@@ -4,6 +4,7 @@ import de.oliver.stackpp.Program;
 import de.oliver.stackpp.virtualMachine.syscalls.Syscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.ExitSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.PrintSyscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.ReadLineSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.TimeSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.CloseFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.OpenFileSyscall;
@@ -73,6 +74,7 @@ public class Machine {
         syscalls.put(9, new GetSpritePropertiesSyscall(9, this));
 
         syscalls.put(10, new TimeSyscall(10, this));
+        syscalls.put(11, new ReadLineSyscall(11, this));
     }
 
     public void runProgram(Program program){
