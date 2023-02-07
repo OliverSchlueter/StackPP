@@ -28,6 +28,24 @@ $ cd build/libs/
 $ java -jar StackPP.jar [path to .spp file]
 ````
 
+### Use as dependency in gradle project
+```console
+$ gradlew publishToMavenLocal
+```
+
+In your project add the following:
+````gradle
+repositories {
+    mavenLocal()
+    ...
+}
+
+dependencies {
+    implementation 'de.oliver:GameEngine:version'
+    ...
+}
+````
+
 ## Documentation
 
 You can find the documentation for the Stack++ language in [StackPP.md](StackPP.md).
