@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'de.oliver:GameEngine:version'
+    implementation 'de.oliver:StackPP:version'
     ...
 }
 ````
