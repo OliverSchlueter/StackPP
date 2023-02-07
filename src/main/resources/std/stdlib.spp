@@ -13,6 +13,7 @@ end
 ; f1 - the pointer to the start of the buffer
 function print
     move 1 i
+    move 0 c
     move f1 f2
 
     while i = 1
