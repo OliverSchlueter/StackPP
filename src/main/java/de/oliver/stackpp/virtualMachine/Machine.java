@@ -133,6 +133,16 @@ public class Machine {
         return null;
     }
 
+    public Syscall getSyscall(Class<? extends Syscall> syscallClass){
+        for (Syscall s : syscalls.values()) {
+            if(s.getClass() == syscallClass){
+                return s;
+            }
+        }
+
+        return null;
+    }
+
     public Memory getMemory() {
         return memory;
     }
