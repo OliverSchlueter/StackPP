@@ -23,6 +23,8 @@ public class Main {
                     );
         }
 
+        long time = System.currentTimeMillis();
+
         Lexer lexer = new Lexer(content);
         LinkedList<Instruction> instructions = lexer.lex();
 
@@ -31,5 +33,9 @@ public class Main {
 
         Machine machine = new Machine();
         machine.runProgram(program);
+
+        time = System.currentTimeMillis() - time;
+
+        System.out.println("Took " + time + "ms");
     }
 }
