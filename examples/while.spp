@@ -1,6 +1,6 @@
-move    a 0
+move a 0
 
-while   a < 10      ; do the following, while the value in 'a' is greater than 10
-print   a           ; print the value in 'a'
-add     a 1         ; add '1' to 'a'
-end                 ; end while-block
+while a < 10    ; do the following, while the value in 'a' is greater than 10
+    print a     ; print the value in 'a'
+    add a 1     ; add '1' to 'a'
+end             ; end while-block
