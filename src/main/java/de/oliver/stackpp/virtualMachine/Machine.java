@@ -7,6 +7,7 @@ import de.oliver.stackpp.virtualMachine.syscalls.impl.PrintSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.ReadLineSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.TimeSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.CloseFileSyscall;
+import de.oliver.stackpp.virtualMachine.syscalls.impl.files.ListFilesSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.OpenFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.files.WriteFileSyscall;
 import de.oliver.stackpp.virtualMachine.syscalls.impl.graphics.CreateSpriteSyscall;
@@ -61,20 +62,17 @@ public class Machine {
 
         // syscalls
         syscalls.put(1, new ExitSyscall(1, this));
-
         syscalls.put(2, new PrintSyscall(2, this));
-
         syscalls.put(3, new OpenFileSyscall(3, this));
         syscalls.put(4, new CloseFileSyscall(4, this));
         syscalls.put(5, new WriteFileSyscall(5, this));
-
         syscalls.put(6, new ShowWindowSyscall(6, this));
         syscalls.put(7, new CreateSpriteSyscall(7, this));
         syscalls.put(8, new EditSpriteSyscall(8, this));
         syscalls.put(9, new GetSpritePropertiesSyscall(9, this));
-
         syscalls.put(10, new TimeSyscall(10, this));
         syscalls.put(11, new ReadLineSyscall(11, this));
+        syscalls.put(12, new ListFilesSyscall(11, this));
     }
 
     public void runProgram(Program program){

@@ -1,4 +1,4 @@
-[![Generic badge](https://img.shields.io/badge/version-1.1.3-orange.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/version-1.1.4-orange.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/status-active_development-darkred.svg)](https://shields.io/)
 
 # Stack++
