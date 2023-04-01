@@ -17,6 +17,7 @@ import de.oliver.stackpp.operations.impl.register.PrintOperation;
 import de.oliver.stackpp.operations.impl.stack.PopOperation;
 import de.oliver.stackpp.operations.impl.stack.PrintStackOperation;
 import de.oliver.stackpp.operations.impl.stack.PushOperation;
+import de.oliver.stackpp.utils.ExceptionHelper;
 import de.oliver.stackpp.virtualMachine.Register;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -79,16 +80,31 @@ public class Parser {
 
         switch (instruction.token()){
             case PUSH -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> value = getValueFromString(instruction.args()[0]);
                 operation = new PushOperation(program, instruction.line(), value);
             }
 
             case POP -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Register<Integer>> register = getRegisterFromString(instruction.args()[0]);
                 operation = new PopOperation(program, instruction.line(), register);
             }
 
             case MOVE -> {
+                if(instruction.args().length < 2){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
                 Function<Program, Register<Integer>> b = getRegisterFromString(instruction.args()[1]);
 
@@ -96,6 +112,11 @@ public class Parser {
             }
 
             case ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO, LEFT_SHIFT, RIGHT_SHIFT, BITWISE_AND, BITWISE_OR, BITWISE_XOR -> {
+                if(instruction.args().length < 2){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 String aStr = instruction.args()[0];
                 String bStr = instruction.args()[1];
 
@@ -117,26 +138,51 @@ public class Parser {
             }
 
             case INCREMENT -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
                 operation = new IncrementOperation(program, instruction.line(), a);
             }
 
             case DECREMENT -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
                 operation = new DecrementOperation(program, instruction.line(), a);
             }
 
             case BITWISE_NOT -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Register<Integer>> a = getRegisterFromString(instruction.args()[0]);
                 operation = new NotOperation(program, instruction.line(), a);
             }
 
             case PRINT -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Register<Integer>> register = getRegisterFromString(instruction.args()[0]);
                 operation = new PrintOperation(program, instruction.line(), register);
             }
 
             case ASCII_PRINT -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> charr = getValueFromString(instruction.args()[0]);
                 operation = new AsciiPrintOperation(program, instruction.line(), charr);
             }
@@ -144,6 +190,11 @@ public class Parser {
             case PRINT_STACK -> operation = new PrintStackOperation(program, instruction.line());
 
             case IF -> {
+                if(instruction.args().length < 3){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
                 Token compareOperation = Token.getTokenByIdentifier(instruction.args()[1]);
                 Function<Program, Integer> b = getValueFromString(instruction.args()[2]);
@@ -154,6 +205,11 @@ public class Parser {
             case ELSE -> operation = new ElseOperation(program, instruction.line());
 
             case WHILE -> {
+                if(instruction.args().length < 3){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> a = getValueFromString(instruction.args()[0]);
                 Token compareOperation = Token.getTokenByIdentifier(instruction.args()[1]);
                 Function<Program, Integer> b = getValueFromString(instruction.args()[2]);
@@ -162,14 +218,22 @@ public class Parser {
             }
 
             case FUNCTION -> {
-                String name = instruction.args()[0];
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
 
+                String name = instruction.args()[0];
                 operation = new FunctionOperation(program, instruction.line(), name);
             }
 
             case CALL -> {
-                String name = instruction.args()[0];
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
 
+                String name = instruction.args()[0];
                 operation = new CallOperation(program, instruction.line(), name);
             }
 
@@ -198,6 +262,11 @@ public class Parser {
             }
 
             case MEM_SET -> {
+                if(instruction.args().length < 2){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
                 Function<Program, Byte> value = getByteFromString(instruction.args()[1]);
 
@@ -205,17 +274,31 @@ public class Parser {
             }
 
             case MEM_GET -> {
-                Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
 
+                Function<Program, Integer> index = getValueFromString(instruction.args()[0]);
                 operation = new MemoryGetOperation(program, instruction.line(), index);
             }
 
             case MEM_ALLOC -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> size = getValueFromString(instruction.args()[0]);
                 operation = new MemoryAllocOperation(program, instruction.line(), size);
             }
 
             case MEM_FREE -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> ptr = getValueFromString(instruction.args()[0]);
                 operation = new MemoryFreeOperation(program, instruction.line(), ptr);
             }
@@ -223,6 +306,11 @@ public class Parser {
             case MEM_DUMP -> operation = new MemoryDumpOperation(program, instruction.line());
 
             case SYSCALL -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> id = getValueFromString(instruction.args()[0]);
                 operation = new SyscallOperation(program, instruction.line(), id);
             }
@@ -230,6 +318,11 @@ public class Parser {
             case STRING -> operation = new StringOperation(program, instruction.line(), instruction.args());
 
             case THROW -> {
+                if(instruction.args().length < 1){
+                    ExceptionHelper.throwException(instruction.line(), "Missing arguments");
+                    System.exit(1);
+                }
+
                 Function<Program, Integer> msgPtr = getValueFromString(instruction.args()[0]);
                 operation = new ThrowOperation(program, instruction.line(), msgPtr);
             }
